@@ -5,7 +5,7 @@
   "type": "module",
   "packageManager": "pnpm@10.28.2",
   "scripts": {
-    "build": "pnpm run build:dialog && pnpm run build:shell && pnpm run build:workspace && pnpm run build:general && pnpm run build:mouse-companion && pnpm run build:effects && pnpm run build:text && pnpm run build:trail && pnpm run build:indicator && pnpm run build:automation && pnpm run build:wasm && node scripts/copy-output.mjs",
+    "build": "node scripts/clean-dist.mjs && pnpm run build:dialog && pnpm run build:shell && pnpm run build:workspace && pnpm run build:general && pnpm run build:mouse-companion && pnpm run build:effects && pnpm run build:text && pnpm run build:trail && pnpm run build:indicator && pnpm run build:automation && pnpm run build:wasm && node scripts/copy-output.mjs",
     "build:dialog": "vite build --mode dialog",
     "build:shell": "vite build --mode shell",
     "build:workspace": "vite build --mode workspace",

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-04-25T08:56:29.390Z",
+  "generated_at": "2026-04-25T09:50:35.264Z",
   "repo_root": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect",
   "budgets": {
     "priority": {
@@ -85,14 +85,14 @@
       ],
       "summary": "current",
       "when_to_read": "Read after P0 for current decisions and active constraints.",
-      "line_count": 230,
-      "size_bytes": 32985,
-      "estimated_tokens": 8247,
+      "line_count": 231,
+      "size_bytes": 33325,
+      "estimated_tokens": 8332,
       "max_read_tokens": 1100,
       "line_limit": 220,
       "line_limit_exceeded": true,
-      "hash_sha1": "018cd53536cf972602f13c14f1fd7f431ec4743f",
-      "updated_at": "2026-04-25T01:45:13.476Z"
+      "hash_sha1": "e122e5111a59bd454f0941d5c644d29db35f8d4e",
+      "updated_at": "2026-04-25T09:31:42.449Z"
     },
     {
       "id": "docs/agent-context/p2-capability-index.md",
@@ -1385,7 +1385,7 @@
       "line_limit": 0,
       "line_limit_exceeded": false,
       "hash_sha1": "3f4dc6ea5a204ff8478384103ba64f2097fb4d8b",
-      "updated_at": "2026-04-25T08:54:47.986Z"
+      "updated_at": "2026-04-25T09:23:06.700Z"
     },
     {
       "id": "docs/ops/windows-installer-packaging.md",

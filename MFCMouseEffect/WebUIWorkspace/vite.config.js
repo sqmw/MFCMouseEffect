@@ -303,8 +303,9 @@ function createDevRuntimePlugin() {
   };
 }
 
-export default defineConfig(({ mode }) => {
+export default defineConfig(({ mode, command }) => {
   const target = pickBuildTarget(mode);
+  const inlineComponentCssForStaticRuntime = command === 'build';
   return {
     server: {
       fs: {
@@ -318,7 +319,13 @@ export default defineConfig(({ mode }) => {
       legalComments: 'none',
     },
     plugins: [
-      svelte(),
+      svelte({
+        // The compiled desktop runtime serves one static WebUI shell that only
+        // links `WebUI/styles.css`. Keep component-scoped CSS inside each
+        // bundle during `vite build`, otherwise static runtime builds miss the
+        // extracted `dist/*.svelte.css` files while Vite dev still looks correct.
+        emitCss: !inlineComponentCssForStaticRuntime,
+      }),
       createDevRuntimePlugin(),
     ],
     build: {
