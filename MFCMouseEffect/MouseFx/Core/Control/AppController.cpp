@@ -272,5 +272,44 @@ intptr_t AppController::OnDispatchMessage(
     return dispatchMessageCodec_->DefaultResult(sourceHandle, msg, wParam, lParam);
 }
 
+void AppController::UpdateMouseSpeed(const ScreenPoint& currentPt) {
+    uint64_t now = CurrentTickMs();
+    if (lastMouseMoveTime_ > 0) {
+        double deltaTime = (now - lastMouseMoveTime_) / 1000.0; // 转换为秒
+        if (deltaTime > 0 && deltaTime < 1.0) { // 避免除以零或过大的时间差
+            int dx = currentPt.x - lastMouseMovePoint_.x;
+            int dy = currentPt.y - lastMouseMovePoint_.y;
+            float distance = std::sqrt(dx * dx + dy * dy);
+            mouseSpeed_ = distance / static_cast<float>(deltaTime);
+            
+            // 平滑处理，避免速度突变
+            smoothedMouseSpeed_ = smoothedMouseSpeed_ * 0.7f + mouseSpeed_ * 0.3f;
+        }
+    }
+    lastMouseMoveTime_ = now;
+    lastMouseMovePoint_ = currentPt;
+}
+
+float AppController::GetMouseSpeed() const {
+    return smoothedMouseSpeed_;
+}
+
+float AppController::GetSpeedAdaptiveIntensity() const {
+    if (!config_.speedAdaptive.enableSpeedAdaptive) {
+        return 1.0f; // 禁用时返回默认强度
+    }
+    
+    // 计算速度因子（0.0-1.0）
+    float speedFactor = std::min(smoothedMouseSpeed_ / 1000.0f, 1.0f); // 假设1000px/s为最大速度
+    
+    // 应用灵敏度
+    speedFactor = std::pow(speedFactor, 1.0f - config_.speedAdaptive.sensitivity);
+    
+    // 计算最终强度
+    float intensity = config_.speedAdaptive.minIntensity + 
+                     (config_.speedAdaptive.maxIntensity - config_.speedAdaptive.minIntensity) * speedFactor;
+    
+    return intensity;
+}
 
 } // namespace mousefx

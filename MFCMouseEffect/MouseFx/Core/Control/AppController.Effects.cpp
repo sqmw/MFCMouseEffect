@@ -131,7 +131,7 @@ void AppController::SetActiveEffectType(EffectCategory category, const std::stri
 }
 
 std::unique_ptr<IMouseEffect> AppController::CreateEffect(EffectCategory category, const std::string& type) {
-    return EffectFactory::Create(category, type, config_);
+    return EffectFactory::Create(category, type, config_, this);
 }
 
 const std::string* AppController::ActiveTypeForCategory(EffectCategory category) const {

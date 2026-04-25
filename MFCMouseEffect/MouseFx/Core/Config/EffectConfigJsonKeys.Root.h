@@ -37,6 +37,15 @@ inline constexpr const char kHold[] = "hold";
 inline constexpr const char kHover[] = "hover";
 } // namespace effect_size_scale
 
+inline constexpr const char kSpeedAdaptive[] = "speed_adaptive";
+
+namespace speed_adaptive {
+inline constexpr const char kEnableSpeedAdaptive[] = "enable_speed_adaptive";
+inline constexpr const char kMinIntensity[] = "min_intensity";
+inline constexpr const char kMaxIntensity[] = "max_intensity";
+inline constexpr const char kSensitivity[] = "sensitivity";
+} // namespace speed_adaptive
+
 namespace mouse_companion {
 inline constexpr const char kEnabled[] = "enabled";
 inline constexpr const char kModelPath[] = "model_path";

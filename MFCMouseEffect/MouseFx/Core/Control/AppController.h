@@ -1030,6 +1030,10 @@ public:
     static constexpr uintptr_t WasmFrameTimerId() { return kWasmFrameTimerId; }
     uint32_t ActiveHoverThresholdMs() const;
     uint32_t ActiveHoldDelayMs() const;
+    // Mouse speed tracking
+    void UpdateMouseSpeed(const ScreenPoint& currentPt);
+    float GetMouseSpeed() const;
+    float GetSpeedAdaptiveIntensity() const;
 #ifdef _DEBUG
     void LogDebugClick(const ClickEvent& ev);
 #else
@@ -1157,6 +1161,12 @@ private:
     ScreenPoint lastPointerPoint_{};
     bool hasLastPointerPoint_ = false;
     bool hovering_ = false;
+    
+    // Mouse speed tracking
+    float mouseSpeed_ = 0.0f;
+    float smoothedMouseSpeed_ = 0.0f;
+    uint64_t lastMouseMoveTime_ = 0;
+    ScreenPoint lastMouseMovePoint_{};
     static constexpr uintptr_t kHoverTimerId = 2;
     static constexpr uint32_t kHoverThresholdMs = 1500;
     static constexpr uint32_t kHoverThresholdTestMs = 320;

@@ -80,5 +80,6 @@ MouseCompanionConfig SanitizeMouseCompanionConfig(MouseCompanionConfig config);
 InputIndicatorConfig SanitizeInputIndicatorConfig(InputIndicatorConfig config);
 InputAutomationConfig SanitizeInputAutomationConfig(InputAutomationConfig config);
 WasmConfig SanitizeWasmConfig(WasmConfig config);
+SpeedAdaptiveConfig SanitizeSpeedAdaptiveConfig(SpeedAdaptiveConfig config);
 
 } // namespace mousefx::config_internal

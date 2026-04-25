@@ -1,0 +1,8 @@
+{
+  "speed_adaptive": {
+    "enable_speed_adaptive": true,
+    "min_intensity": 0.5,
+    "max_intensity": 1.5,
+    "sensitivity": 0.7
+  }
+}

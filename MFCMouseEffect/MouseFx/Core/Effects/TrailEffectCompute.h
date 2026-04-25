@@ -82,6 +82,7 @@ TrailEffectRenderCommand ComputeTrailEffectRenderCommand(
     double deltaX,
     double deltaY,
     const std::string& effectType,
-    const TrailEffectProfile& profile);
+    const TrailEffectProfile& profile,
+    double speedAdaptiveIntensity = 1.0);
 
 } // namespace mousefx

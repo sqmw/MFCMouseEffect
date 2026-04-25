@@ -8,12 +8,13 @@
 
 namespace mousefx {
 
+class AppController;
 class ITrailRenderer;
 class TrailOverlayLayer;
 
 class TrailEffect final : public IMouseEffect {
 public:
-    TrailEffect(const std::string& themeName, const std::string& type, const EffectConfig& config);
+    TrailEffect(const std::string& themeName, const std::string& type, const EffectConfig& config, AppController* controller = nullptr);
     ~TrailEffect() override;
 
     EffectCategory Category() const override { return EffectCategory::Trail; }
@@ -39,6 +40,7 @@ private:
     float lineWidth_ = 4.0f;
     TrailRendererParamsConfig params_{};
     bool isChromatic_ = false;
+    AppController* controller_ = nullptr;
 };
 
 } // namespace mousefx

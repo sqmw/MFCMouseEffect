@@ -314,6 +314,18 @@ struct EffectConflictPolicyConfig {
     std::string holdMovePolicy = "hold_only";
 };
 
+// Configuration for speed adaptive effect intensity
+struct SpeedAdaptiveConfig {
+    // Enable speed adaptive effect intensity
+    bool enableSpeedAdaptive = false;
+    // Minimum intensity (0.0 - 1.0)
+    float minIntensity = 0.5f;
+    // Maximum intensity (0.0 - 1.0)
+    float maxIntensity = 1.5f;
+    // Sensitivity (0.0 - 1.0, higher = more responsive)
+    float sensitivity = 0.5f;
+};
+
 // Active effect selections per category (persisted).
 struct ActiveEffectConfig {
     std::string click = "text";
@@ -363,6 +375,7 @@ struct EffectConfig {
     InputIndicatorConfig inputIndicator;
     InputAutomationConfig automation;
     WasmConfig wasm;
+    SpeedAdaptiveConfig speedAdaptive;
     
     TrailHistoryProfile GetTrailHistoryProfile(const std::string& type) const;
     
