@@ -17,6 +17,11 @@
 </p>
 
 <p align="center">
+  <a href="https://oosmetrics.com/repo/sqmw/MFCMouseEffect"><img src="https://api.oosmetrics.com/api/v1/badge/achievement/31e5b655-dbea-48bf-8e2d-be7763743b0c.svg" alt="oosmetrics Top 7 in WebAssembly by acceleration - 2026-05-14"></a>
+</p>
+<p align="center"><sub>第三方增长指标收录：oosmetrics WebAssembly acceleration achievement</sub></p>
+
+<p align="center">
   <a href="https://github.com/sqmw/MFCMouseEffect/releases">📦 下载</a> ·
   <a href="./docs/README.zh-CN.md">📖 文档</a> ·
   <a href="./PRIVACY.zh-CN.md">🔒 隐私政策</a> ·
