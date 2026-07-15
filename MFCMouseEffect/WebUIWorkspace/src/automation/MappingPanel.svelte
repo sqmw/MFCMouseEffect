@@ -873,10 +873,7 @@
               onActionMoveUp={(index) => moveAction(row, index, -1)}
               onActionMoveDown={(index) => moveAction(row, index, 1)}
               onActionRemove={(index) => removeAction(row, index)}
-              onAddShortcutAction={() => addAction(row, { type: 'send_shortcut', shortcut: '' })}
-              onAddDelayAction={() => addAction(row, { type: 'delay', delay_ms: 120 })}
-              onAddOpenUrlAction={() => addAction(row, { type: 'open_url', url: '' })}
-              onAddLaunchAppAction={() => addAction(row, { type: 'launch_app', app_path: '' })}
+              on:addaction={(event) => addAction(row, event.detail?.action)}
               onToggleModifierRecord={(target) => toggleRecord(row.id, target)}
               onTriggerButtonChange={(event) => emitRowChange(row.id, 'triggerButton', event.currentTarget.value)}
               onGestureTriggerChange={(event) => emitRowChange(row.id, 'triggerChain', event.detail?.trigger)}

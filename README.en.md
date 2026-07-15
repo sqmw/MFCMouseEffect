@@ -133,6 +133,10 @@
 ### macOS
 
 ```bash
+make build                         # Unified build entrypoint (current macOS host)
+make build ARGS="--skip-webui-build"
+make test                          # Full POSIX regression suite
+make check                         # Docs + WebUI + POSIX regression
 ./mfx build                       # Build current host only
 ./mfx build --skip-webui-build    # Skip rebuilding WebUIWorkspace
 ./mfx run                         # Build and run
@@ -235,6 +239,12 @@ Current macOS builds are unsigned. Gatekeeper may block first launch; right-clic
 <summary><b>🧪 Regression & Self-Check (expand)</b></summary>
 
 ```bash
+# Unified make entrypoints (pass underlying options through ARGS)
+make test                          # Full POSIX suite
+make test ARGS="--skip-linux-gate"
+make test-webui                    # WebUI model + dev-contract tests
+make check-docs                    # AI-context and doc-health checks
+
 # Full POSIX suite
 ./tools/platform/regression/run-posix-regression-suite.sh --platform auto
 

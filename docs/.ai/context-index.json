@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-05-19T08:00:56.648Z",
+  "generated_at": "2026-07-15T11:45:58.589Z",
   "repo_root": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect",
   "budgets": {
     "priority": {
@@ -1370,22 +1370,25 @@
         "plugin",
         "effects",
         "theme",
+        "regression",
+        "workflow",
         "macos",
         "windows",
+        "linux",
         "contract",
         "abi",
         "debug"
       ],
       "summary": "Common manual commands for local iteration and debugging.",
       "when_to_read": "Read when task touches automation mapping or gesture recognition.",
-      "line_count": 307,
-      "size_bytes": 32547,
-      "estimated_tokens": 8137,
+      "line_count": 316,
+      "size_bytes": 33416,
+      "estimated_tokens": 8354,
       "max_read_tokens": 750,
       "line_limit": 0,
       "line_limit_exceeded": false,
-      "hash_sha1": "3f4dc6ea5a204ff8478384103ba64f2097fb4d8b",
-      "updated_at": "2026-04-25T09:23:06.700Z"
+      "hash_sha1": "86b45839e3c3ee8657aa81c24f6e7d0268692a9a",
+      "updated_at": "2026-07-15T11:39:42.972Z"
     },
     {
       "id": "docs/ops/windows-installer-packaging.md",
@@ -1478,14 +1481,14 @@
       ],
       "summary": "Language: [English](README.md) | [中文](README.zh-CN.md)",
       "when_to_read": "Read when task touches automation mapping or gesture recognition.",
-      "line_count": 135,
-      "size_bytes": 5383,
-      "estimated_tokens": 1346,
+      "line_count": 139,
+      "size_bytes": 5678,
+      "estimated_tokens": 1420,
       "max_read_tokens": 750,
       "line_limit": 140,
       "line_limit_exceeded": false,
-      "hash_sha1": "6961b3a2edb422d8269b6fe6c988b8b1b4aaf39c",
-      "updated_at": "2026-04-21T09:50:39.759Z"
+      "hash_sha1": "63124b0f31ec29b91f9d40931e325281f291ae43",
+      "updated_at": "2026-07-15T11:40:12.135Z"
     },
     {
       "id": "docs/README.zh-CN.md",
@@ -1515,14 +1518,14 @@
       ],
       "summary": "语言： [English](README.md) | [中文](README.zh-CN.md)",
       "when_to_read": "Read when task touches automation mapping or gesture recognition.",
-      "line_count": 136,
-      "size_bytes": 5530,
-      "estimated_tokens": 1383,
+      "line_count": 140,
+      "size_bytes": 5829,
+      "estimated_tokens": 1458,
       "max_read_tokens": 750,
       "line_limit": 140,
       "line_limit_exceeded": false,
-      "hash_sha1": "4103a56cf9e3c578eed57f6335e2829f262361ed",
-      "updated_at": "2026-04-21T09:50:39.758Z"
+      "hash_sha1": "fc1a1be9ca6595e0c683dbc9f3daac4d5e179d24",
+      "updated_at": "2026-07-15T11:40:12.135Z"
     },
     {
       "id": "docs/refactoring/phase-roadmap-macos-m1-status.md",
@@ -1559,6 +1562,68 @@
       "line_limit_exceeded": false,
       "hash_sha1": "04288dcded8f8f3e5c8a1e61cbb0cbd0e993c477",
       "updated_at": "2026-03-10T10:41:14.953Z"
+    },
+    {
+      "id": "docs/reviews/2026-07-15-repository-audit.md",
+      "relative_path": "docs/reviews/2026-07-15-repository-audit.md",
+      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/reviews/2026-07-15-repository-audit.md",
+      "priority": "P2",
+      "role": "capability",
+      "topic": "automation",
+      "first_read_rank": 0,
+      "tags": [
+        "reviews",
+        "repository",
+        "audit",
+        "automation",
+        "wasm",
+        "indicator",
+        "theme",
+        "regression",
+        "swift",
+        "macos",
+        "windows",
+        "contract"
+      ],
+      "summary": "| Priority | Status | Finding | Evidence / action |",
+      "when_to_read": "Read when task touches automation mapping or gesture recognition.",
+      "line_count": 37,
+      "size_bytes": 2976,
+      "estimated_tokens": 744,
+      "max_read_tokens": 750,
+      "line_limit": 0,
+      "line_limit_exceeded": false,
+      "hash_sha1": "93fb07d3541fc4b0d789d6c6603263b1fbaff4e6",
+      "updated_at": "2026-07-15T11:42:34.596Z"
+    },
+    {
+      "id": "docs/TODO.md",
+      "relative_path": "docs/TODO.md",
+      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/TODO.md",
+      "priority": "P2",
+      "role": "capability",
+      "topic": "automation",
+      "first_read_rank": 0,
+      "tags": [
+        "todo",
+        "automation",
+        "regression",
+        "macos",
+        "windows",
+        "linux",
+        "contract",
+        "abi"
+      ],
+      "summary": "Status source of truth for cross-capability work. Capability documents retain their details but must link back here when they create a follow-up.",
+      "when_to_read": "Read when task touches automation mapping or gesture recognition.",
+      "line_count": 28,
+      "size_bytes": 2270,
+      "estimated_tokens": 568,
+      "max_read_tokens": 688,
+      "line_limit": 0,
+      "line_limit_exceeded": false,
+      "hash_sha1": "6ddcce38648043ada1266a4650ffab6ba8a24204",
+      "updated_at": "2026-07-15T11:41:53.625Z"
     }
   ]
 }

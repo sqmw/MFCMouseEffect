@@ -26,6 +26,7 @@
   - `/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/archive/README.md`
 
 ## 稳定工作流文档
+- 主 TODO 与审核记录：`/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/TODO.md`、`/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/reviews/`
 - `/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/architecture/agent-doc-governance.md`
 - `/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/architecture/posix-regression-suite-workflow.md`
 - `/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/architecture/posix-scaffold-regression-workflow.md`
@@ -85,6 +86,9 @@ rg -n "permission|automation|app_scope|effects|wasm" docs/refactoring docs/autom
 
 ## 本地命令
 ```bash
+# 统一 Makefile 入口；底层参数通过 ARGS 透传
+make build | make test | make test-webui | make check-docs | make check
+
 ./mfx run
 # 跳过 core/WebUI 编译
 ./mfx run-no-build

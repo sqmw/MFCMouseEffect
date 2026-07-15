@@ -1,4 +1,6 @@
 <script>
+  import { createEventDispatcher } from 'svelte';
+
   export let rowId = '';
   export let row = {};
   export let rowEnabled = true;
@@ -27,10 +29,6 @@
   export let onActionMoveUp = null;
   export let onActionMoveDown = null;
   export let onActionRemove = null;
-  export let onAddShortcutAction = null;
-  export let onAddDelayAction = null;
-  export let onAddOpenUrlAction = null;
-  export let onAddLaunchAppAction = null;
   export let onToggleModifierRecord = null;
   export let onTriggerButtonChange = null;
   export let onGestureTriggerChange = null;
@@ -40,6 +38,8 @@
   import MappingActionListEditor from './MappingActionListEditor.svelte';
   import GesturePatternEditor from './GesturePatternEditor.svelte';
   import TriggerChainEditor from './TriggerChainEditor.svelte';
+
+  const dispatch = createEventDispatcher();
 
   function callHandler(handler, ...args) {
     if (typeof handler === 'function') {
@@ -95,10 +95,7 @@
       onActionMoveUp={onActionMoveUp}
       onActionMoveDown={onActionMoveDown}
       onActionRemove={onActionRemove}
-      onAddShortcutAction={onAddShortcutAction}
-      onAddDelayAction={onAddDelayAction}
-      onAddOpenUrlAction={onAddOpenUrlAction}
-      onAddLaunchAppAction={onAddLaunchAppAction}
+      on:addaction={(event) => dispatch('addaction', event.detail)}
     />
   {/if}
 
@@ -188,10 +185,7 @@
         onActionMoveUp={onActionMoveUp}
         onActionMoveDown={onActionMoveDown}
         onActionRemove={onActionRemove}
-        onAddShortcutAction={onAddShortcutAction}
-        onAddDelayAction={onAddDelayAction}
-        onAddOpenUrlAction={onAddOpenUrlAction}
-        onAddLaunchAppAction={onAddLaunchAppAction}
+        on:addaction={(event) => dispatch('addaction', event.detail)}
       />
     </section>
   {/if}

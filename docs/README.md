@@ -25,6 +25,7 @@ Compact AI-first index for fast navigation. This file is intentionally short and
   - `/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/archive/README.md`
 
 ## Stable Workflow Docs
+- Main TODO and audit reviews: `/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/TODO.md`, `/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/reviews/`
 - `/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/architecture/agent-doc-governance.md`
 - `/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/architecture/posix-regression-suite-workflow.md`
 - `/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/architecture/posix-scaffold-regression-workflow.md`
@@ -84,6 +85,9 @@ rg -n "permission|automation|app_scope|effects|wasm" docs/refactoring docs/autom
 
 ## Local Commands
 ```bash
+# unified Makefile; pass native options through ARGS
+make build | make test | make test-webui | make check-docs | make check
+
 ./mfx run
 # skips core/WebUI rebuild
 ./mfx run-no-build

@@ -4,6 +4,15 @@
 Common manual commands for local iteration and debugging.
 Keep P1 concise; add details here when needed.
 
+## Unified Make Entry Points
+- `make help`: list supported workflows without changing project state.
+- `make build`: build for the current supported host; use `make build ARGS="--skip-webui-build"` for the macOS build-script option.
+- `make test`: run the canonical POSIX regression suite; forward suite options through `ARGS`, for example `make test ARGS="--skip-linux-gate"`.
+- `make test-webui`: run the WebUI model and source-mode contract tests.
+- `make check-docs`: validate AI-context freshness and run the non-blocking doc-hygiene report.
+- `make check`: run `check-docs`, `test-webui`, then the POSIX suite; it is intentionally the full, high-load validation path.
+- `make package`: package for the current supported host. Windows-only commands must run from the synced Windows workspace; macOS build/test commands must run from this primary macOS workspace.
+
 ## Core Runtime
 - `./mfx run`
 - `./mfx start`

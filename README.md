@@ -133,6 +133,10 @@
 ### macOS
 
 ```bash
+make build                         # 统一构建入口（当前 macOS 宿主）
+make build ARGS="--skip-webui-build"
+make test                          # 全量 POSIX 回归套件
+make check                         # 文档 + WebUI + POSIX 回归
 ./mfx build                       # 仅编译当前宿主
 ./mfx build --skip-webui-build    # 跳过 WebUIWorkspace 重编译
 ./mfx run                         # 编译并启动
@@ -235,6 +239,12 @@ Shipping 保留主运行时与 WebUI，但裁掉深度测试和重诊断能力�
 <summary><b>🧪 回归与自检（展开查看）</b></summary>
 
 ```bash
+# make 统一入口（所有底层参数通过 ARGS 转发）
+make test                          # 全量 POSIX 套件
+make test ARGS="--skip-linux-gate"
+make test-webui                    # WebUI model + dev-contract 测试
+make check-docs                    # AI 上下文与文档健康检查
+
 # 全量 POSIX 套件
 ./tools/platform/regression/run-posix-regression-suite.sh --platform auto
 

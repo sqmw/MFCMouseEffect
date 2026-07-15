@@ -56,6 +56,33 @@ runTest('automation api avoids component method lookup by string name', () => {
   assert.equal(source.includes('typeof target[name]'), false, 'forbidden typeof target[name] lookup detected in automation/api.js');
 });
 
+runTest('automation add-action buttons use component event forwarding', () => {
+  const actionListSource = stripLineComments(readWorkspaceFile(path.join('src', 'automation', 'MappingActionListEditor.svelte')));
+  const shortcutPanelSource = stripLineComments(readWorkspaceFile(path.join('src', 'automation', 'MappingShortcutPanel.svelte')));
+  const panelSource = stripLineComments(readWorkspaceFile(path.join('src', 'automation', 'MappingPanel.svelte')));
+
+  assert.equal(
+    actionListSource.includes("dispatch('addaction'"),
+    true,
+    'MappingActionListEditor must dispatch addaction events for add buttons',
+  );
+  assert.equal(
+    actionListSource.includes('$: actions = Array.isArray(row?.actions) ? row.actions : [];'),
+    true,
+    'MappingActionListEditor must expose row.actions through a reactive actions variable',
+  );
+  assert.equal(
+    shortcutPanelSource.includes("dispatch('addaction', event.detail)"),
+    true,
+    'MappingShortcutPanel must re-dispatch addaction events instead of relying on nested callback props',
+  );
+  assert.equal(
+    panelSource.includes("on:addaction={(event) => addAction(row, event.detail?.action)}"),
+    true,
+    'MappingPanel must consume forwarded addaction events and route them into addAction(row, action)',
+  );
+});
+
 if (failed > 0) {
   console.error(`[result] failed: ${failed}`);
   process.exit(1);

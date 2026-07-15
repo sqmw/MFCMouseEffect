@@ -1,4 +1,6 @@
 <script>
+  import { createEventDispatcher } from 'svelte';
+
   export let rowId = '';
   export let row = {};
   export let rowEnabled = true;
@@ -17,10 +19,9 @@
   export let onActionMoveUp = null;
   export let onActionMoveDown = null;
   export let onActionRemove = null;
-  export let onAddShortcutAction = null;
-  export let onAddDelayAction = null;
-  export let onAddOpenUrlAction = null;
-  export let onAddLaunchAppAction = null;
+
+  const dispatch = createEventDispatcher();
+  let actions = [];
 
   function callHandler(handler, ...args) {
     if (typeof handler === 'function') {
@@ -28,13 +29,15 @@
     }
   }
 
-  function actionsOfRow() {
-    return Array.isArray(row?.actions) ? row.actions : [];
+  function emitAddAction(action) {
+    dispatch('addaction', { action });
   }
 
   function actionTypeOf(action) {
     return `${action?.type || 'send_shortcut'}`.trim().toLowerCase() || 'send_shortcut';
   }
+
+  $: actions = Array.isArray(row?.actions) ? row.actions : [];
 </script>
 
 <div
@@ -46,11 +49,11 @@
     <div class="automation-shortcut-label">{texts.actionsLabel}</div>
   {/if}
 
-  {#if actionsOfRow().length === 0}
+  {#if actions.length === 0}
     <div class="automation-action-empty">{texts.actionsEmpty}</div>
   {/if}
 
-  {#each actionsOfRow() as action, index (`${action.type || 'send_shortcut'}-${index}`)}
+  {#each actions as action, index (`${action.type || 'send_shortcut'}-${index}`)}
     <div class="automation-action-card">
       <div class="automation-action-card-head">
         <span class="automation-action-index">{texts.actionLabel} {index + 1}</span>
@@ -69,7 +72,7 @@
           <button
             class="btn-soft automation-action-tool"
             type="button"
-            disabled={!rowEnabled || index >= actionsOfRow().length - 1}
+            disabled={!rowEnabled || index >= actions.length - 1}
             title={texts.moveDown}
             aria-label={texts.moveDown}
             on:click={() => callHandler(onActionMoveDown, index)}
@@ -170,7 +173,7 @@
   {/each}
 
   <div class="automation-action-adders">
-    <button class="btn-soft automation-action-add automation-action-add--shortcut" type="button" disabled={!rowEnabled} on:click={() => callHandler(onAddShortcutAction)}>
+    <button class="btn-soft automation-action-add automation-action-add--shortcut" type="button" disabled={!rowEnabled} on:click|stopPropagation={() => emitAddAction({ type: 'send_shortcut', shortcut: '' })}>
       <span class="automation-action-add-icon" aria-hidden="true">
         <svg viewBox="0 0 16 16" focusable="false">
           <rect x="2.25" y="4" width="11.5" height="8" rx="2" />
@@ -179,7 +182,7 @@
       </span>
       <span>{texts.addShortcutAction}</span>
     </button>
-    <button class="btn-soft automation-action-add automation-action-add--delay" type="button" disabled={!rowEnabled} on:click={() => callHandler(onAddDelayAction)}>
+    <button class="btn-soft automation-action-add automation-action-add--delay" type="button" disabled={!rowEnabled} on:click|stopPropagation={() => emitAddAction({ type: 'delay', delay_ms: 120 })}>
       <span class="automation-action-add-icon" aria-hidden="true">
         <svg viewBox="0 0 16 16" focusable="false">
           <circle cx="8" cy="8.5" r="4.75" />
@@ -188,7 +191,7 @@
       </span>
       <span>{texts.addDelayAction}</span>
     </button>
-    <button class="btn-soft automation-action-add automation-action-add--url" type="button" disabled={!rowEnabled} on:click={() => callHandler(onAddOpenUrlAction)}>
+    <button class="btn-soft automation-action-add automation-action-add--url" type="button" disabled={!rowEnabled} on:click|stopPropagation={() => emitAddAction({ type: 'open_url', url: '' })}>
       <span class="automation-action-add-icon" aria-hidden="true">
         <svg viewBox="0 0 16 16" focusable="false">
           <path d="M6.6 5.1l.9-.9a3 3 0 0 1 4.25 4.25l-.9.9M9.4 10.9l-.9.9a3 3 0 0 1-4.25-4.25l.9-.9M6.5 9.5l3-3" />
@@ -196,7 +199,7 @@
       </span>
       <span>{texts.addOpenUrlAction}</span>
     </button>
-    <button class="btn-soft automation-action-add automation-action-add--app" type="button" disabled={!rowEnabled} on:click={() => callHandler(onAddLaunchAppAction)}>
+    <button class="btn-soft automation-action-add automation-action-add--app" type="button" disabled={!rowEnabled} on:click|stopPropagation={() => emitAddAction({ type: 'launch_app', app_path: '' })}>
       <span class="automation-action-add-icon" aria-hidden="true">
         <svg viewBox="0 0 16 16" focusable="false">
           <rect x="3" y="3.25" width="10" height="9.5" rx="2" />

@@ -28,16 +28,14 @@ USAGE
 done
 
 SETTINGS_OPTIONS_FILE="$REPO_ROOT/MFCMouseEffect/Settings/SettingsOptions.h"
-SCHEMA_OPTIONS_FILE="$REPO_ROOT/MFCMouseEffect/MouseFx/Server/SettingsSchemaBuilder.OptionsSections.cpp"
-WIN_TRAY_MENU_FILE="$REPO_ROOT/MFCMouseEffect/Platform/windows/Shell/Tray/Win32TrayMenuBuilder.cpp"
-MAC_TRAY_MENU_FILE="$REPO_ROOT/MFCMouseEffect/Platform/macos/Shell/MacosTrayMenuFactory.cpp"
+SCHEMA_OPTIONS_FILE="$REPO_ROOT/MFCMouseEffect/MouseFx/Server/settings/SettingsSchemaBuilder.OptionsSections.cpp"
+SHELL_CORE_FILE="$REPO_ROOT/MFCMouseEffect/MouseFx/Core/Shell/AppShellCore.cpp"
 HTTP_STATE_CHECKS_FILE="$REPO_ROOT/tools/platform/regression/lib/core_http_state_checks.sh"
 
 for required_file in \
     "$SETTINGS_OPTIONS_FILE" \
     "$SCHEMA_OPTIONS_FILE" \
-    "$WIN_TRAY_MENU_FILE" \
-    "$MAC_TRAY_MENU_FILE" \
+    "$SHELL_CORE_FILE" \
     "$HTTP_STATE_CHECKS_FILE"; do
     if [[ ! -f "$required_file" ]]; then
         mfx_fail "missing required file: $required_file"
@@ -65,27 +63,9 @@ mfx_assert_file_contains \
     "schema options themes must source runtime catalog"
 
 mfx_assert_file_contains \
-    "$WIN_TRAY_MENU_FILE" \
-    "for (const auto& option : mousefx::GetThemeOptions())" \
-    "windows tray themes must source runtime catalog"
-
-mfx_assert_file_contains \
-    "$WIN_TRAY_MENU_FILE" \
-    "TryReadDynamicThemeMenuItem" \
-    "windows tray dynamic theme mapping fallback must stay enabled"
-
-mfx_assert_file_contains \
-    "$MAC_TRAY_MENU_FILE" \
-    "host->GetThemeMenuSnapshotFromShell(" \
-    "macos tray theme submenu must source theme snapshot from shell host boundary"
-
-if mfx_file_contains_fixed "$MAC_TRAY_MENU_FILE" "MouseFx/Styles/ThemeStyle.h"; then
-    mfx_fail "macos tray menu factory must not directly include ThemeStyle; use shell host snapshot boundary"
-fi
-
-if mfx_file_contains_fixed "$MAC_TRAY_MENU_FILE" "MouseFx/Utils/StringUtils.h"; then
-    mfx_fail "macos tray menu factory must not directly include StringUtils; trim/codec should stay outside shell-style boundary"
-fi
+    "$SHELL_CORE_FILE" \
+    "const std::vector<ThemeOption> options = GetThemeOptions();" \
+    "shell theme snapshot must source runtime catalog"
 
 mfx_assert_file_contains \
     "$HTTP_STATE_CHECKS_FILE" \
