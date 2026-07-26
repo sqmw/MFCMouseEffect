@@ -7,7 +7,7 @@
 
 | 状态 | 事项 | 验收 / 下一步 | 相关材料 |
 | --- | --- | --- | --- |
-| blocking | P0 生命周期所有权 | 消除 stdin IPC（`IpcController` detach + 裸 `this`）与 WebSettings 关停（`TokenMonitor.StopAsync` detach lambda）的 use-after-free 路径；macOS 伴宠桥接需专项验证异步 hide 与 release 的主线程顺序；各加 ASan 回归。 | `docs/reviews/2026-07-26-restart-scan.zh-CN.md` |
+| blocking | P0 生命周期所有权（剩余部分） | stdin IPC（Win `IpcController` + posix `StdinExitMonitor`）与 WebSettings `StopAsync` 已于 2026-07-26 修复（见 Archive）。剩余：macOS 伴宠桥接专项验证异步 hide 与 release 的主线程顺序；将 ASan/TSAN 用例正式纳入回归套件。 | `docs/reviews/2026-07-26-restart-scan.zh-CN.md` |
 | pending | 收尾提交，恢复干净工作区 | 将 7-15 / 7-26 两份复盘、本文件、`docs/.ai` 索引对一起提交；同时处理与 AGENTS 规则冲突的根目录 `windows-manual-handoff.tmp`。 | `docs/reviews/2026-07-26-restart-scan.zh-CN.md` |
 | pending | macOS dispatch 生命周期 | `SendSync`、timer、析构收敛到统一状态机；补 TSAN 竞态覆盖。 | `docs/reviews/2026-07-15-full-project-audit.md` |
 | pending | WASM retained 状态配额 | 按插件/surface 限制 group 与 retained 实例数量，加 TTL/诊断，测试配额耗尽。 | `docs/reviews/2026-07-15-full-project-audit.md` |
@@ -32,6 +32,7 @@
 
 | 日期 | 事项 | 结果 / 验证 | 残余风险 |
 | --- | --- | --- | --- |
+| 2026-07-26 | P0：stdin IPC 与 WebSettings 关停生命周期 | `IpcController` 改共享状态 + 锁内回调（Stop 后回调不可达）；新增 `PosixStdinExitMonitor` 供 core/scaffold shell 复用并在 Shutdown/析构 Detach；`StopAsync` 改为持有的可 join 线程并在析构先 join。全部受影响 TU 以 g++17 语法门禁通过；`IpcController` 以 ASan+UBSan 动态验证销毁后灌 stdin 无 UAF。 | macOS 原生构建与全量回归未在本环境执行；正式 ASan 回归尚未纳入套件。 |
 | 2026-07-26 | 全量扫描复核（只读） | 复核 7-15 审计全部条目：P0×2 原样存在、伴宠桥接部分收敛待验证、P1/P2/P3 基本未动；产出 `docs/reviews/2026-07-26-restart-scan.zh-CN.md` 并刷新本表。 | 动态回归与 Windows 构建仍未执行（见上表）。 |
 | 2026-07-15 | 统一 Makefile 入口 | 新增文档化薄 `build/test/check/package/audit` 目标；已验证 help、命令分发、`make audit`、WebUI 测试与 CMake configure。 | 全量原生回归与 Windows 构建仍待执行。 |
 | 2026-07-15 | 仓库级静态审计 | 覆盖跟踪源码 + 当前 WebUI diff；shell/Node 语法检查、安全模式扫描、CMake configure、定向 surface 门禁通过。 | 动态全量与 Windows 覆盖仍待执行。 |

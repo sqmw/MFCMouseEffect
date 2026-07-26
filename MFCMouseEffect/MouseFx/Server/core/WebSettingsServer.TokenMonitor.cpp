@@ -56,10 +56,41 @@ void WebSettingsServer::StopMonitor() {
 }
 
 void WebSettingsServer::StopAsync() {
-    std::thread([this]() {
+    // Runs on an HTTP handler thread: defer the stop so the handler can
+    // finish its response, but keep the worker owned and joinable instead
+    // of detaching a lambda that captures `this`.
+    std::lock_guard<std::mutex> lock(deferredStopMutex_);
+    if (deferredStopPending_.load()) {
+        return;
+    }
+    if (deferredStopThread_.joinable()) {
+        // A previous deferred stop already ran to completion.
+        deferredStopThread_.join();
+    }
+    deferredStopPending_.store(true);
+    deferredStopThread_ = std::thread([this]() {
         std::this_thread::sleep_for(std::chrono::milliseconds(50));
         Stop();
-    }).detach();
+        deferredStopPending_.store(false);
+    });
+}
+
+void WebSettingsServer::JoinDeferredStop() {
+    std::thread pending;
+    {
+        std::lock_guard<std::mutex> lock(deferredStopMutex_);
+        pending = std::move(deferredStopThread_);
+    }
+    if (!pending.joinable()) {
+        return;
+    }
+    if (std::this_thread::get_id() == pending.get_id()) {
+        // Destruction from the deferred thread itself is not a supported
+        // path; detach as a last resort instead of self-joining.
+        pending.detach();
+        return;
+    }
+    pending.join();
 }
 
 } // namespace mousefx

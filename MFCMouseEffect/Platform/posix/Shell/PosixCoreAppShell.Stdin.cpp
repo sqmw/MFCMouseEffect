@@ -4,33 +4,15 @@
 
 #if MFX_PLATFORM_MACOS || MFX_PLATFORM_LINUX
 
-#include "Platform/posix/Shell/PosixShellExitCommand.h"
-
-#include <iostream>
-#include <string>
-#include <thread>
-
 namespace mousefx::platform {
 
 void PosixCoreAppShell::StartStdinExitMonitor() {
-    if (stdinMonitorStarted_) {
-        return;
-    }
-    stdinMonitorStarted_ = true;
-
     auto* eventLoop = services_.eventLoopService.get();
-    std::thread([eventLoop]() {
-        std::string line;
-        while (std::getline(std::cin, line)) {
-            if (IsPosixShellExitCommandLine(line) && eventLoop) {
-                eventLoop->RequestExit();
-                return;
-            }
-        }
+    stdinExitMonitor_.Start([eventLoop]() {
         if (eventLoop) {
             eventLoop->RequestExit();
         }
-    }).detach();
+    });
 }
 
 } // namespace mousefx::platform

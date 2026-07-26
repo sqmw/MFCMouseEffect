@@ -60,6 +60,7 @@ void PosixScaffoldAppShell::Shutdown() {
     if (!initialized_) {
         return;
     }
+    stdinExitMonitor_.Detach();
     if (services_.trayService) {
         services_.trayService->Stop();
     }

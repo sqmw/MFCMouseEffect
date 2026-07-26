@@ -46,6 +46,7 @@ private:
     void StartMonitor();
     void StopMonitor();
     void StopAsync();
+    void JoinDeferredStop();
 
     AppController* controller_ = nullptr;
     std::unique_ptr<HttpServer> http_{};
@@ -55,6 +56,11 @@ private:
     std::atomic<uint64_t> lastRequestMs_{0};
     std::atomic<bool> monitorRunning_{false};
     std::thread monitorThread_{};
+    // Deferred stop is an owned, joinable thread instead of a detached
+    // lambda holding `this`; the destructor joins it before teardown.
+    std::atomic<bool> deferredStopPending_{false};
+    std::thread deferredStopThread_{};
+    std::mutex deferredStopMutex_{};
     int idleTimeoutMs_ = 5 * 60 * 1000;
 };
 

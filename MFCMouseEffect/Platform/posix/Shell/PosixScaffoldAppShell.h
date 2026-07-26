@@ -4,6 +4,7 @@
 #include "MouseFx/Core/Shell/ShellPlatformServices.h"
 #include "Platform/IPlatformAppShell.h"
 #include "Platform/PlatformTarget.h"
+#include "Platform/posix/Shell/PosixStdinExitMonitor.h"
 #include "Platform/posix/Shell/ScaffoldSettingsRuntime.h"
 
 #include <string>
@@ -43,7 +44,9 @@ private:
     ScaffoldSettingsRuntime scaffoldRuntime_{};
     bool initialized_ = false;
     bool backgroundMode_ = false;
-    bool stdinMonitorStarted_ = false;
+    // Declared after services_ so it is destroyed first: its destructor
+    // detaches the reader thread before the event loop service goes away.
+    PosixStdinExitMonitor stdinExitMonitor_{};
 };
 #endif
 

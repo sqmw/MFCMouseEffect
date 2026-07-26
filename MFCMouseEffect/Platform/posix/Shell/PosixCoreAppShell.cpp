@@ -125,6 +125,7 @@ void PosixCoreAppShell::Shutdown() {
     if (!initialized_) {
         return;
     }
+    stdinExitMonitor_.Detach();
     if (webSettingsCoordinator_) {
         webSettingsCoordinator_->Stop();
     }

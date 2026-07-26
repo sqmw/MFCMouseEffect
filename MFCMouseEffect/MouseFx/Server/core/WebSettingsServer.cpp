@@ -17,6 +17,9 @@ WebSettingsServer::WebSettingsServer(AppController* controller) : controller_(co
 }
 
 WebSettingsServer::~WebSettingsServer() {
+    // Join the deferred stop worker first so no thread can reach `this`
+    // while members are being destroyed.
+    JoinDeferredStop();
     Stop();
 }
 

@@ -151,6 +151,7 @@ if(MFX_ENABLE_ENTRY_RUNTIME_TARGETS)
         "${MFX_PROJECT_ROOT}/Platform/posix/Shell/PosixScaffoldAppShell.cpp"
         "${MFX_PROJECT_ROOT}/Platform/posix/Shell/PosixScaffoldAppShell.Stdin.cpp"
         "${MFX_PROJECT_ROOT}/Platform/posix/Shell/PosixShellExitCommand.cpp"
+        "${MFX_PROJECT_ROOT}/Platform/posix/Shell/PosixStdinExitMonitor.cpp"
         "${MFX_PROJECT_ROOT}/Platform/posix/Shell/ScaffoldSettingsApi.cpp"
         "${MFX_PROJECT_ROOT}/Platform/posix/Shell/ScaffoldSettingsApi.StatePatch.cpp"
         "${MFX_PROJECT_ROOT}/Platform/posix/Shell/ScaffoldSettingsRequestHandler.Api.cpp"
