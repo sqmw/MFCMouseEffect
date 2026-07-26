@@ -549,7 +549,7 @@ private final class MfxWasmRetainedGlowEmitterState: NSObject {
             publishParticlesToView()
             return
         }
-        let deltaMs = max<UInt64>(1, min<UInt64>(100, nowMs - lastTickMs))
+        let deltaMs = max(UInt64(1), min(UInt64(100), nowMs - lastTickMs))
         lastTickMs = nowMs
         updateParticles(dtSec: CGFloat(Double(deltaMs) / 1000.0), nowMs: nowMs)
         if nowMs >= emitterExpireTickMs && particles.isEmpty {

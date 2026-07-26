@@ -445,7 +445,7 @@ private final class MfxWasmRetainedQuadFieldState: NSObject {
     private func updateViewOnMain(nowMs: UInt64) {
         let elapsedMs = nowMs >= startTickMs ? (nowMs - startTickMs) : 0
         let elapsedSec = CGFloat(Double(elapsedMs) / 1000.0)
-        let progress = CGFloat(min(1.0, max(0.0, Double(elapsedMs) / Double(max<UInt64>(1, ttlMs)))))
+        let progress = CGFloat(min(1.0, max(0.0, Double(elapsedMs) / Double(max(UInt64(1), ttlMs)))))
         let fade = mfxQuadFieldClamp(1.0 - progress * progress, min: 0.0, max: 1.0)
 
         view?.sprites = sprites.compactMap { sprite in

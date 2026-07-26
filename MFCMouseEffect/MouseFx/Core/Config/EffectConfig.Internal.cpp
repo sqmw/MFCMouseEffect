@@ -6,6 +6,7 @@
 #include "MouseFx/Utils/MathUtils.h"
 #include "MouseFx/Utils/StringUtils.h"
 
+#include <filesystem>
 #include <fstream>
 #include <iomanip>
 #include <sstream>
@@ -511,7 +512,9 @@ WasmConfig SanitizeWasmConfig(WasmConfig config) {
 }
 
 std::string ReadFileAsUtf8(const std::wstring& path) {
-    std::ifstream file(path, std::ios::binary);
+    // std::filesystem::path bridges wstring -> native path on every
+    // platform; libc++ has no wstring ifstream constructor (MSVC extension).
+    std::ifstream file(std::filesystem::path(path), std::ios::binary);
     if (!file.is_open()) {
         return "";
     }

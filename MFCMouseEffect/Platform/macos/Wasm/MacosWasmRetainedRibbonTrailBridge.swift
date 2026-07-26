@@ -310,7 +310,7 @@ private final class MfxWasmRetainedRibbonTrailState: NSObject {
             return
         }
         let remaining = CGFloat(expireTickMs - now)
-        let total = CGFloat(max<UInt64>(1, ttlMs))
+        let total = CGFloat(max(UInt64(1), ttlMs))
         let progress = 1.0 - remaining / total
         let opacity = mfxTrailClamp(1.0 - progress * progress, min: 0.0, max: 1.0) * alphaScale
         contentView?.layer?.opacity = Float(opacity)
@@ -346,7 +346,7 @@ private final class MfxWasmRetainedRibbonTrailState: NSObject {
             self.frameTopPx += Int32(appliedGroupOffsetYPx.rounded())
         }
         self.squareSizePx = max(1, squareSizePx)
-        self.ttlMs = max<UInt64>(40, ttlMs)
+        self.ttlMs = max(UInt64(40), ttlMs)
         self.expireTickMs = Self.nowMs() + self.ttlMs
         self.alphaScale = mfxTrailClamp(alpha, min: 0.0, max: 1.0)
         self.clipLeftPx = clipLeftPx

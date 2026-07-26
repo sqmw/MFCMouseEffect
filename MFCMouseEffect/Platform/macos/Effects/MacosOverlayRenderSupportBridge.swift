@@ -250,42 +250,47 @@ public func mfx_macos_overlay_resolve_screen_frame_v1(
     _ outWidth: UnsafeMutablePointer<Double>?,
     _ outHeight: UnsafeMutablePointer<Double>?
 ) -> Int32 {
-    var frame = NSRect.zero
-    var ok = false
-    let resolveOnMain = {
+    // Swift 6 strict concurrency: return a value from the main-actor hop
+    // instead of mutating captured locals across isolation domains.
+    @MainActor
+    func resolveOnMain() -> NSRect? {
         let screens = NSScreen.screens
         if screens.isEmpty {
-            return
+            return nil
         }
 
         let point = NSPoint(x: CGFloat(x), y: CGFloat(y))
         for screen in screens where screen.frame.contains(point) {
             let candidate = screen.frame
             if candidate.width > 0.0 && candidate.height > 0.0 {
-                frame = candidate
-                ok = true
+                return candidate
             }
-            return
+            return nil
         }
 
         if let fallback = NSScreen.main ?? screens.first {
             let candidate = fallback.frame
             if candidate.width > 0.0 && candidate.height > 0.0 {
-                frame = candidate
-                ok = true
+                return candidate
+            }
+        }
+        return nil
+    }
+
+    let resolved: NSRect?
+    if Thread.isMainThread {
+        resolved = MainActor.assumeIsolated {
+            resolveOnMain()
+        }
+    } else {
+        resolved = DispatchQueue.main.sync {
+            MainActor.assumeIsolated {
+                resolveOnMain()
             }
         }
     }
 
-    if Thread.isMainThread {
-        resolveOnMain()
-    } else {
-        DispatchQueue.main.sync {
-            resolveOnMain()
-        }
-    }
-
-    if !ok {
+    guard let frame = resolved else {
         return 0
     }
     outX?.pointee = Double(frame.origin.x)
