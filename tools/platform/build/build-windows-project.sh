@@ -37,20 +37,44 @@ require_windows_host() {
 }
 
 find_msbuild() {
-    local candidates=(
-        "/c/Program Files/Microsoft Visual Studio/18/Professional/MSBuild/Current/Bin/amd64/MSBuild.exe"
-        "/c/Program Files/Microsoft Visual Studio/18/Professional/MSBuild/Current/Bin/MSBuild.exe"
-        "/c/Program Files/Microsoft Visual Studio/18/Insiders/MSBuild/Current/Bin/amd64/MSBuild.exe"
-        "/c/Program Files/Microsoft Visual Studio/18/Insiders/MSBuild/Current/Bin/MSBuild.exe"
-    )
-    local candidate
-    for candidate in "${candidates[@]}"; do
-        if [[ -x "$candidate" ]]; then
-            printf '%s\n' "$candidate"
-            return 0
-        fi
+    # 1) Explicit override wins (POSIX-style path, e.g. from CI or a
+    #    nonstandard install): MFX_MSBUILD=/c/.../MSBuild.exe
+    if [[ -n "${MFX_MSBUILD:-}" && -x "${MFX_MSBUILD}" ]]; then
+        printf '%s\n' "${MFX_MSBUILD}"
+        return 0
+    fi
+
+    # 2) vswhere-based discovery covers every installed edition/channel.
+    local vswhere="/c/Program Files (x86)/Microsoft Visual Studio/Installer/vswhere.exe"
+    if [[ -x "$vswhere" ]]; then
+        local pattern found converted
+        for pattern in 'MSBuild\**\Bin\amd64\MSBuild.exe' 'MSBuild\**\Bin\MSBuild.exe'; do
+            found="$("$vswhere" -latest -products '*' -requires Microsoft.Component.MSBuild \
+                -find "$pattern" 2>/dev/null | head -n 1 | tr -d '\r')"
+            if [[ -n "$found" ]]; then
+                converted="$(cygpath -u "$found" 2>/dev/null || printf '%s\n' "$found")"
+                if [[ -x "$converted" ]]; then
+                    printf '%s\n' "$converted"
+                    return 0
+                fi
+            fi
+        done
+    fi
+
+    # 3) Static fallback across known VS18 editions (including Build Tools).
+    local edition candidate
+    for edition in Professional Enterprise Community BuildTools Insiders; do
+        for candidate in \
+            "/c/Program Files/Microsoft Visual Studio/18/${edition}/MSBuild/Current/Bin/amd64/MSBuild.exe" \
+            "/c/Program Files/Microsoft Visual Studio/18/${edition}/MSBuild/Current/Bin/MSBuild.exe"; do
+            if [[ -x "$candidate" ]]; then
+                printf '%s\n' "$candidate"
+                return 0
+            fi
+        done
     done
-    echo "MSBuild.exe not found in expected VS2026 locations" >&2
+
+    echo "MSBuild.exe not found (tried MFX_MSBUILD, vswhere, and VS18 edition paths)" >&2
     exit 1
 }
 
