@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-07-26T09:30:56.384Z",
+  "generated_at": "2026-07-26T10:24:31.470Z",
   "repo_root": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect",
   "budgets": {
     "priority": {
@@ -47,13 +47,13 @@
       "summary": "Repository-level collaboration and engineering rules for AI agents and developers.",
       "when_to_read": "Always read first.",
       "line_count": 159,
-      "size_bytes": 9418,
-      "estimated_tokens": 2355,
+      "size_bytes": 9463,
+      "estimated_tokens": 2366,
       "max_read_tokens": 1500,
       "line_limit": 260,
       "line_limit_exceeded": false,
-      "hash_sha1": "c12c19e052a0bae12a93f1f74f1f8ee027ddb8da",
-      "updated_at": "2026-04-18T14:35:20.878Z"
+      "hash_sha1": "657fde430c85190fe70b982d0a8fa1c1c9fa5d1b",
+      "updated_at": "2026-07-26T10:22:43.612Z"
     },
     {
       "id": "docs/agent-context/current.md",
@@ -85,14 +85,14 @@
       ],
       "summary": "current",
       "when_to_read": "Read after P0 for current decisions and active constraints.",
-      "line_count": 232,
-      "size_bytes": 33840,
-      "estimated_tokens": 8460,
+      "line_count": 209,
+      "size_bytes": 34059,
+      "estimated_tokens": 8515,
       "max_read_tokens": 1100,
       "line_limit": 220,
-      "line_limit_exceeded": true,
-      "hash_sha1": "b6757d09f549f49e47714dae538d2d83130fad10",
-      "updated_at": "2026-04-25T10:52:22.024Z"
+      "line_limit_exceeded": false,
+      "hash_sha1": "58c57c18b15402f5eca92a1f5230484f82ba20c6",
+      "updated_at": "2026-07-26T10:23:25.059Z"
     },
     {
       "id": "docs/agent-context/p2-capability-index.md",
@@ -1687,14 +1687,14 @@
       ],
       "summary": "跨能力工作的唯一状态源。能力文档保留细节，但产生后续事项时必须回链到这里。",
       "when_to_read": "Read when task touches automation mapping or gesture recognition.",
-      "line_count": 41,
-      "size_bytes": 5936,
-      "estimated_tokens": 1484,
+      "line_count": 43,
+      "size_bytes": 6686,
+      "estimated_tokens": 1672,
       "max_read_tokens": 750,
       "line_limit": 0,
       "line_limit_exceeded": false,
-      "hash_sha1": "2141ae70199794969c5ede69bf7ac41793339f0e",
-      "updated_at": "2026-07-26T09:30:45.399Z"
+      "hash_sha1": "48a7b466fc15eb9fd96e56ed96711b8bd1eccac9",
+      "updated_at": "2026-07-26T10:24:02.759Z"
     }
   ]
 }

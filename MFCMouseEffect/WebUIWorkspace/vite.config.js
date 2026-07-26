@@ -2,68 +2,13 @@ import path from 'node:path';
 import fs from 'node:fs';
 import { defineConfig } from 'vite';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
+import { WEBUI_BUILD_TARGETS } from './scripts/webui-bundle-manifest.mjs';
 
 const ENTRY_ROOT = 'src/entries';
 const DEV_RUNTIME_ROUTE = '/__mfx/dev-runtime';
 const DEFAULT_DEV_PROBE_FILE = '/tmp/mfx-core-websettings.probe';
 
-const TARGETS = {
-  indicator: {
-    entry: 'input-indicator-main.js',
-    name: 'MfxInputIndicatorSettingsBundle',
-    fileName: 'input-indicator-settings.svelte.js',
-  },
-  trail: {
-    entry: 'trail-main.js',
-    name: 'MfxTrailSettingsBundle',
-    fileName: 'trail-settings.svelte.js',
-  },
-  text: {
-    entry: 'text-main.js',
-    name: 'MfxTextSettingsBundle',
-    fileName: 'text-settings.svelte.js',
-  },
-  effects: {
-    entry: 'effects-main.js',
-    name: 'MfxEffectsSettingsBundle',
-    fileName: 'effects-settings.svelte.js',
-  },
-  general: {
-    entry: 'general-main.js',
-    name: 'MfxGeneralSettingsBundle',
-    fileName: 'general-settings.svelte.js',
-  },
-  'mouse-companion': {
-    entry: 'mouse-companion-main.js',
-    name: 'MfxMouseCompanionSettingsBundle',
-    fileName: 'mouse-companion-settings.svelte.js',
-  },
-  automation: {
-    entry: 'automation-main.js',
-    name: 'MfxAutomationUiBundle',
-    fileName: 'automation-ui.svelte.js',
-  },
-  wasm: {
-    entry: 'wasm-main.js',
-    name: 'MfxWasmSectionBundle',
-    fileName: 'wasm-settings.svelte.js',
-  },
-  dialog: {
-    entry: 'dialog-main.js',
-    name: 'MfxDialogBundle',
-    fileName: 'dialog.svelte.js',
-  },
-  shell: {
-    entry: 'shell-main.js',
-    name: 'MfxSettingsShellBundle',
-    fileName: 'settings-shell.svelte.js',
-  },
-  workspace: {
-    entry: 'main.js',
-    name: 'MfxSectionWorkspaceBundle',
-    fileName: 'section-workspace.svelte.js',
-  },
-};
+const TARGETS = WEBUI_BUILD_TARGETS;
 
 function pickBuildTarget(mode) {
   const target = TARGETS[mode] || TARGETS.workspace;

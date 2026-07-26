@@ -44,6 +44,10 @@ bool HasRequiredAsset(const std::filesystem::path& baseDir, std::string_view fil
     return PathExists(baseDir / std::filesystem::path(fileName));
 }
 
+// Required-asset probe: must stay a subset of the bundle manifest at
+// WebUIWorkspace/scripts/webui-bundle-manifest.mjs. The retired
+// cursor-decoration bundle is intentionally no longer required; it is not
+// produced by any build target and only ever existed as a stale local file.
 bool HasPreferredWebUiAssets(const std::filesystem::path& baseDir) {
     return HasRequiredAsset(baseDir, "index.html") &&
         HasRequiredAsset(baseDir, "app.js") &&
@@ -51,8 +55,7 @@ bool HasPreferredWebUiAssets(const std::filesystem::path& baseDir) {
         HasRequiredAsset(baseDir, "app-actions.js") &&
         HasRequiredAsset(baseDir, "app-gesture-debug.js") &&
         HasRequiredAsset(baseDir, "settings-form-input-indicator.js") &&
-        HasRequiredAsset(baseDir, "input-indicator-settings.svelte.js") &&
-        HasRequiredAsset(baseDir, "cursor-decoration-settings.svelte.js");
+        HasRequiredAsset(baseDir, "input-indicator-settings.svelte.js");
 }
 
 void AddWebUiDirIfExistsUnique(

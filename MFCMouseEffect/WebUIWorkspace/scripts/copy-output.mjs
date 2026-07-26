@@ -2,40 +2,17 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import {
+  generatedWebUiFiles,
+  managedWebUiFiles,
+  staticWebUiFiles,
+} from './webui-bundle-manifest.mjs';
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const workspaceDir = path.resolve(__dirname, '..');
 const projectDir = path.resolve(workspaceDir, '..');
 const repoRoot = path.resolve(projectDir, '..');
 const webUiDir = path.join(projectDir, 'WebUI');
-
-const generatedFiles = [
-  'dialog.svelte.js',
-  'settings-shell.svelte.js',
-  'section-workspace.svelte.js',
-  'general-settings.svelte.js',
-  'mouse-companion-settings.svelte.js',
-  'effects-settings.svelte.js',
-  'text-settings.svelte.js',
-  'trail-settings.svelte.js',
-  'input-indicator-settings.svelte.js',
-  'automation-ui.svelte.js',
-  'wasm-settings.svelte.js',
-];
-
-const staticWebUiFiles = [
-  'index.html',
-  'app.js',
-  'app-core.js',
-  'app-actions.js',
-  'app-gesture-debug.js',
-  'styles.css',
-  'web-api.js',
-  'settings-form.js',
-  'settings-form-input-indicator.js',
-  'i18n.js',
-  'i18n-runtime.js',
-  'automation-templates.js',
-];
 
 function copyOrThrow(source, target) {
   if (!fs.existsSync(source)) {
@@ -65,11 +42,36 @@ function copyGeneratedBundleOrThrow(source, target) {
   fs.writeFileSync(target, wrapped, 'utf8');
 }
 
-for (const fileName of generatedFiles) {
+// Deterministic staging: any web artifact in a managed directory that is
+// not listed in the bundle manifest is a retired leftover and is removed,
+// so stale bundles cannot keep old code paths alive across builds.
+function purgeUnmanagedWebArtifacts(dir) {
+  if (!fs.existsSync(dir)) {
+    return;
+  }
+  const managed = new Set(managedWebUiFiles);
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    if (!entry.isFile()) {
+      continue;
+    }
+    if (!/\.(js|css|html)$/.test(entry.name)) {
+      continue;
+    }
+    if (managed.has(entry.name)) {
+      continue;
+    }
+    fs.rmSync(path.join(dir, entry.name));
+    console.log(`[copy-output] removed retired WebUI artifact: ${path.join(dir, entry.name)}`);
+  }
+}
+
+for (const fileName of generatedWebUiFiles) {
   const source = path.join(workspaceDir, 'dist', fileName);
   const target = path.join(webUiDir, fileName);
   copyGeneratedBundleOrThrow(source, target);
 }
+
+purgeUnmanagedWebArtifacts(webUiDir);
 
 const runtimeWebUiDirs = [
   path.join(repoRoot, 'x64', 'Debug', 'webui'),
@@ -81,7 +83,7 @@ for (const runtimeDir of runtimeWebUiDirs) {
     continue;
   }
 
-  for (const fileName of generatedFiles) {
+  for (const fileName of generatedWebUiFiles) {
     const source = path.join(webUiDir, fileName);
     const target = path.join(runtimeDir, fileName);
     copyOrThrow(source, target);
@@ -92,4 +94,6 @@ for (const runtimeDir of runtimeWebUiDirs) {
     const target = path.join(runtimeDir, fileName);
     copyOrThrow(source, target);
   }
+
+  purgeUnmanagedWebArtifacts(runtimeDir);
 }
