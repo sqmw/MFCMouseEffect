@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-07-26T10:24:44.051Z",
+  "generated_at": "2026-07-26T10:43:12.075Z",
   "repo_root": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect",
   "budgets": {
     "priority": {
@@ -1687,14 +1687,14 @@
       ],
       "summary": "跨能力工作的唯一状态源。能力文档保留细节，但产生后续事项时必须回链到这里。",
       "when_to_read": "Read when task touches automation mapping or gesture recognition.",
-      "line_count": 43,
-      "size_bytes": 6686,
-      "estimated_tokens": 1672,
+      "line_count": 44,
+      "size_bytes": 7317,
+      "estimated_tokens": 1830,
       "max_read_tokens": 750,
       "line_limit": 0,
       "line_limit_exceeded": false,
-      "hash_sha1": "48a7b466fc15eb9fd96e56ed96711b8bd1eccac9",
-      "updated_at": "2026-07-26T10:24:02.759Z"
+      "hash_sha1": "c29ed049c196d93a738f7d0ef05cf3fd1502ea2e",
+      "updated_at": "2026-07-26T10:43:04.866Z"
     }
   ]
 }
