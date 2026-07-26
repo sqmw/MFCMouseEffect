@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-07-26T09:23:30.413Z",
+  "generated_at": "2026-07-26T09:30:56.149Z",
   "repo_root": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect",
   "budgets": {
     "priority": {
@@ -1679,20 +1679,22 @@
         "automation",
         "wasm",
         "effects",
+        "swift",
         "macos",
         "windows",
-        "linux"
+        "linux",
+        "abi"
       ],
       "summary": "跨能力工作的唯一状态源。能力文档保留细节，但产生后续事项时必须回链到这里。",
       "when_to_read": "Read when task touches automation mapping or gesture recognition.",
-      "line_count": 39,
-      "size_bytes": 5127,
-      "estimated_tokens": 1282,
+      "line_count": 41,
+      "size_bytes": 5936,
+      "estimated_tokens": 1484,
       "max_read_tokens": 750,
       "line_limit": 0,
       "line_limit_exceeded": false,
-      "hash_sha1": "de1a8c2805b67479a2eea9f248b9d0c87ae41fe8",
-      "updated_at": "2026-07-26T09:23:11.890Z"
+      "hash_sha1": "2141ae70199794969c5ede69bf7ac41793339f0e",
+      "updated_at": "2026-07-26T09:30:45.399Z"
     }
   ]
 }

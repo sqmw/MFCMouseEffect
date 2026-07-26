@@ -2672,12 +2672,25 @@ private final class MfxMouseCompanionPanelHandle: NSObject {
     }
 }
 
+// Main-actor panel registry. The C ABI still transports an opaque
+// "pointer", but its bits are a registry ID, never an object address.
+// Queued async operations that land after release simply miss the
+// registry lookup and become no-ops, so no ordering of hide / update /
+// apply_pose vs release can dereference a freed handle.
+@MainActor
+private var mfxMouseCompanionPanelRegistry: [UInt: MfxMouseCompanionPanelHandle] = [:]
+@MainActor
+private var mfxMouseCompanionPanelNextId: UInt = 1
+
 @MainActor
 private func mfxCreateMouseCompanionPanelOnMainThread(_ sizePx: Int, _ offsetX: Int, _ offsetY: Int) -> UnsafeMutableRawPointer? {
     let app = NSApplication.shared
     app.setActivationPolicy(.accessory)
     let handle = MfxMouseCompanionPanelHandle(sizePx: sizePx, offsetX: offsetX, offsetY: offsetY)
-    return Unmanaged.passRetained(handle).toOpaque()
+    let panelId = mfxMouseCompanionPanelNextId
+    mfxMouseCompanionPanelNextId &+= 1
+    mfxMouseCompanionPanelRegistry[panelId] = handle
+    return UnsafeMutableRawPointer(bitPattern: panelId)
 }
 
 @MainActor
@@ -2685,10 +2698,10 @@ private func mfxReleaseMouseCompanionPanelOnMainThread(_ panelHandleBits: UInt) 
     guard panelHandleBits != 0 else {
         return
     }
-    guard let ptr = UnsafeMutableRawPointer(bitPattern: panelHandleBits) else {
+    // Double release degrades to a no-op instead of over-releasing.
+    guard let handle = mfxMouseCompanionPanelRegistry.removeValue(forKey: panelHandleBits) else {
         return
     }
-    let handle = Unmanaged<MfxMouseCompanionPanelHandle>.fromOpaque(ptr).takeRetainedValue()
     handle.closeAndCleanup()
 }
 
@@ -2700,10 +2713,9 @@ private func mfxWithMouseCompanionPanelHandle(
     guard panelHandleBits != 0 else {
         return
     }
-    guard let ptr = UnsafeMutableRawPointer(bitPattern: panelHandleBits) else {
+    guard let handle = mfxMouseCompanionPanelRegistry[panelHandleBits] else {
         return
     }
-    let handle = Unmanaged<MfxMouseCompanionPanelHandle>.fromOpaque(ptr).takeUnretainedValue()
     body(handle)
 }
 
