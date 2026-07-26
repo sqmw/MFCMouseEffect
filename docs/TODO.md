@@ -7,7 +7,7 @@
 
 | 状态 | 事项 | 验收 / 下一步 | 相关材料 |
 | --- | --- | --- | --- |
-| blocking | P0 生命周期收尾验证 | 三处 P0 均已修复（见 Archive）：stdin IPC、WebSettings `StopAsync`、macOS 伴宠桥接（改主线程注册表 + ID，release 后异步操作降级 no-op）。剩余：宿主机跑 `./mfx build` 验证 Swift 编译与伴宠冒烟；将 ASan/TSAN 用例正式纳入回归套件。 | `docs/reviews/2026-07-26-restart-scan.zh-CN.md` |
+| pending | ASan/TSAN 用例入套件 | 三处 P0 已修复且宿主机 `./mfx build` + `make check` 全绿（见 Archive）。剩余：把 IpcController/PosixStdinExitMonitor 的 ASan 用例与 dispatch 生命周期 TSAN 用例正式纳入回归套件。 | `docs/reviews/2026-07-26-restart-scan.zh-CN.md` |
 | pending | 收尾提交，恢复干净工作区 | 将 7-15 / 7-26 两份复盘、本文件、`docs/.ai` 索引对一起提交；同时处理与 AGENTS 规则冲突的根目录 `windows-manual-handoff.tmp`。 | `docs/reviews/2026-07-26-restart-scan.zh-CN.md` |
 | pending | macOS dispatch 生命周期 | `SendSync`、timer、析构收敛到统一状态机；补 TSAN 竞态覆盖。 | `docs/reviews/2026-07-15-full-project-audit.md` |
 | pending | WASM retained 状态配额 | 按插件/surface 限制 group 与 retained 实例数量，加 TTL/诊断，测试配额耗尽。 | `docs/reviews/2026-07-15-full-project-audit.md` |
@@ -16,7 +16,6 @@
 | pending | CI 与发布信任链 | 最小干净环境 CI 矩阵；单一版本源 + tag/commit/产物映射；签名/公证决策落文档。 | `docs/reviews/2026-07-15-full-project-audit.md` |
 | pending | 有界架构拆分 | 在向 `AppController`（.h 1274 行）、伴宠诊断、Mouse Companion WebUI（2406 行）加行为前，先批准分阶段兼容拆分方案。 | `docs/reviews/2026-07-15-full-project-audit.md` |
 | pending | 本地控制面与无障碍加固 | 设置 token / probe 文件卫生；补齐 dialog/tab/mapping 键盘契约与回归。 | `docs/reviews/2026-07-15-full-project-audit.md` |
-| pending | 全量回归执行（仅剩 macOS 原生侧） | Linux 门禁等效构建已在沙箱通过（见 Archive）。剩余必须在 macOS 宿主机执行：`./mfx build`（验证 Swift 桥接编译 + WebUI 重建）后 `make check`，记录结果。 | `docs/reviews/2026-07-15-full-project-audit.md` |
 | in_progress | Automation mapping 能力 | 仅经其范围内路线图推进；新的跨能力后续事项复制到本表。 | `docs/automation/automation-mapping-todo.zh-CN.md` |
 
 ## Risks / constraints
@@ -31,6 +30,7 @@
 
 | 日期 | 事项 | 结果 / 验证 | 残余风险 |
 | --- | --- | --- | --- |
+| 2026-07-26 | macOS 宿主全量回归（`./mfx build` + `make check`） | 全绿（22 ok / 0 fail）：WebUI 11 bundle 构建 + purge 生效、Swift 全量编译、tray/事件循环冒烟、automation/effects/wasm 合同回归与 selfcheck、linux 编译门禁。期间修复工具链漂移 3 类（Swift 6 sending 竞态、`max<T>` 显式特化、libc++ wstring ifstream）并把回归套件对齐现行产品契约（托盘 3 项菜单、`none` 一等禁用值、退役 tray theme selfcheck）。 | ld 警告：部分 Swift 目标文件按 macOS 26.5 编译、按 26.0 链接（无害，SDK 版本漂移）。 |
 | 2026-07-26 | Linux 门禁等效构建 + scaffold 冒烟（沙箱） | 无 cmake 环境下按 CMakeLists 清单手工 g++ 编译 Linux scaffold 全部 50 TU（0 失败），链接出可运行 scaffold 宿主；stdin `exit` 命令与 EOF 两条退出路径冒烟均 exit=0；`PosixStdinExitMonitor` 另以 ASan+UBSan 验证 Detach+销毁后灌入 exit/EOF 无 UAF、handler 不再触发。 | macOS 原生（Swift/AppKit）与 Windows 构建仍需真实宿主机。 |
 | 2026-07-26 | WebUI bundle 清单统一 | 新增 `webui-bundle-manifest.mjs` 单一源，`vite.config.js` / `copy-output.mjs` 共用；copy 阶段自动清除未列管的退役 `js/css/html`（含 runtime webui 目录）；resolver 去掉退役 `cursor-decoration-settings.svelte.js` 强依赖；删除本地陈旧 `cursor-decoration` / `pet3d` bundle；新增 `test:webui-bundle-manifest` 4 项契约测试入链，全绿。 | 宿主机 `pnpm run build` 全链验证与 clean-room 打包断言未执行。 |
 | 2026-07-26 | Windows 构建脚本与 Syncthing 边界 | `find_msbuild` 改为 `MFX_MSBUILD` 覆盖 -> `vswhere` 全版本探测 -> VS18 五版本静态回退；`.stignore` 补嵌套 `WebUIWorkspace`、`examples` 的 `node_modules/dist/build` 忽略；`bash -n` 通过。 | 真实 Windows 构建未执行（需 Windows 宿主）。 |
