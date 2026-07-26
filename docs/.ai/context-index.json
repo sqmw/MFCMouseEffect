@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "generated_at": "2026-07-15T11:45:58.589Z",
-  "repo_root": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect",
+  "generated_at": "2026-07-26T09:15:08.386Z",
+  "repo_root": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect",
   "budgets": {
     "priority": {
       "P0": 1500,
@@ -27,7 +27,7 @@
     {
       "id": "AGENTS.md",
       "relative_path": "AGENTS.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/AGENTS.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/AGENTS.md",
       "priority": "P0",
       "role": "global-contract",
       "topic": "workflow",
@@ -58,7 +58,7 @@
     {
       "id": "docs/agent-context/current.md",
       "relative_path": "docs/agent-context/current.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/agent-context/current.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/agent-context/current.md",
       "priority": "P1",
       "role": "first-read",
       "topic": "automation",
@@ -97,7 +97,7 @@
     {
       "id": "docs/agent-context/p2-capability-index.md",
       "relative_path": "docs/agent-context/p2-capability-index.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/agent-context/p2-capability-index.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/agent-context/p2-capability-index.md",
       "priority": "P2",
       "role": "capability",
       "topic": "automation",
@@ -135,7 +135,7 @@
     {
       "id": "docs/architecture/agent-doc-governance.md",
       "relative_path": "docs/architecture/agent-doc-governance.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/architecture/agent-doc-governance.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/architecture/agent-doc-governance.md",
       "priority": "P2",
       "role": "architecture",
       "topic": "automation",
@@ -163,7 +163,7 @@
     {
       "id": "docs/architecture/click-ripple-cross-platform-alignment.md",
       "relative_path": "docs/architecture/click-ripple-cross-platform-alignment.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/architecture/click-ripple-cross-platform-alignment.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/architecture/click-ripple-cross-platform-alignment.md",
       "priority": "P2",
       "role": "architecture",
       "topic": "effects",
@@ -195,7 +195,7 @@
     {
       "id": "docs/architecture/cursor-decoration-plugin-contract.md",
       "relative_path": "docs/architecture/cursor-decoration-plugin-contract.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/architecture/cursor-decoration-plugin-contract.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/architecture/cursor-decoration-plugin-contract.md",
       "priority": "P2",
       "role": "architecture",
       "topic": "wasm",
@@ -228,7 +228,7 @@
     {
       "id": "docs/architecture/custom-effects-wasm-route.md",
       "relative_path": "docs/architecture/custom-effects-wasm-route.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/architecture/custom-effects-wasm-route.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/architecture/custom-effects-wasm-route.md",
       "priority": "P2",
       "role": "architecture",
       "topic": "wasm",
@@ -262,7 +262,7 @@
     {
       "id": "docs/architecture/custom-effects-wasm-route.zh-CN.md",
       "relative_path": "docs/architecture/custom-effects-wasm-route.zh-CN.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/architecture/custom-effects-wasm-route.zh-CN.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/architecture/custom-effects-wasm-route.zh-CN.md",
       "priority": "P2",
       "role": "architecture",
       "topic": "wasm",
@@ -295,7 +295,7 @@
     {
       "id": "docs/architecture/mouse-companion-3d-runtime-blueprint.zh-CN.md",
       "relative_path": "docs/architecture/mouse-companion-3d-runtime-blueprint.zh-CN.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/architecture/mouse-companion-3d-runtime-blueprint.zh-CN.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/architecture/mouse-companion-3d-runtime-blueprint.zh-CN.md",
       "priority": "P2",
       "role": "architecture",
       "topic": "general",
@@ -327,7 +327,7 @@
     {
       "id": "docs/architecture/mouse-companion-action-clip-contract.zh-CN.md",
       "relative_path": "docs/architecture/mouse-companion-action-clip-contract.zh-CN.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/architecture/mouse-companion-action-clip-contract.zh-CN.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/architecture/mouse-companion-action-clip-contract.zh-CN.md",
       "priority": "P2",
       "role": "architecture",
       "topic": "effects",
@@ -358,7 +358,7 @@
     {
       "id": "docs/architecture/mouse-companion-appearance-contract.zh-CN.md",
       "relative_path": "docs/architecture/mouse-companion-appearance-contract.zh-CN.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/architecture/mouse-companion-appearance-contract.zh-CN.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/architecture/mouse-companion-appearance-contract.zh-CN.md",
       "priority": "P2",
       "role": "architecture",
       "topic": "wasm",
@@ -389,7 +389,7 @@
     {
       "id": "docs/architecture/mouse-companion-backend-reset-contract.zh-CN.md",
       "relative_path": "docs/architecture/mouse-companion-backend-reset-contract.zh-CN.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/architecture/mouse-companion-backend-reset-contract.zh-CN.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/architecture/mouse-companion-backend-reset-contract.zh-CN.md",
       "priority": "P2",
       "role": "architecture",
       "topic": "wasm",
@@ -420,7 +420,7 @@
     {
       "id": "docs/architecture/mouse-companion-click-parity-tauri-contract.zh-CN.md",
       "relative_path": "docs/architecture/mouse-companion-click-parity-tauri-contract.zh-CN.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/architecture/mouse-companion-click-parity-tauri-contract.zh-CN.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/architecture/mouse-companion-click-parity-tauri-contract.zh-CN.md",
       "priority": "P2",
       "role": "architecture",
       "topic": "general",
@@ -451,7 +451,7 @@
     {
       "id": "docs/architecture/mouse-companion-model-import-pipeline-contract.zh-CN.md",
       "relative_path": "docs/architecture/mouse-companion-model-import-pipeline-contract.zh-CN.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/architecture/mouse-companion-model-import-pipeline-contract.zh-CN.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/architecture/mouse-companion-model-import-pipeline-contract.zh-CN.md",
       "priority": "P2",
       "role": "architecture",
       "topic": "general",
@@ -481,7 +481,7 @@
     {
       "id": "docs/architecture/mouse-companion-plugin-landing-roadmap.zh-CN.md",
       "relative_path": "docs/architecture/mouse-companion-plugin-landing-roadmap.zh-CN.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/architecture/mouse-companion-plugin-landing-roadmap.zh-CN.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/architecture/mouse-companion-plugin-landing-roadmap.zh-CN.md",
       "priority": "P2",
       "role": "architecture",
       "topic": "wasm",
@@ -516,7 +516,7 @@
     {
       "id": "docs/architecture/mouse-companion-position-mode-contract.zh-CN.md",
       "relative_path": "docs/architecture/mouse-companion-position-mode-contract.zh-CN.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/architecture/mouse-companion-position-mode-contract.zh-CN.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/architecture/mouse-companion-position-mode-contract.zh-CN.md",
       "priority": "P2",
       "role": "architecture",
       "topic": "general",
@@ -546,7 +546,7 @@
     {
       "id": "docs/architecture/mouse-companion-procedural-effect-profile-contract.zh-CN.md",
       "relative_path": "docs/architecture/mouse-companion-procedural-effect-profile-contract.zh-CN.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/architecture/mouse-companion-procedural-effect-profile-contract.zh-CN.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/architecture/mouse-companion-procedural-effect-profile-contract.zh-CN.md",
       "priority": "P2",
       "role": "architecture",
       "topic": "effects",
@@ -577,7 +577,7 @@
     {
       "id": "docs/architecture/posix-core-automation-contract-workflow.md",
       "relative_path": "docs/architecture/posix-core-automation-contract-workflow.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/architecture/posix-core-automation-contract-workflow.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/architecture/posix-core-automation-contract-workflow.md",
       "priority": "P2",
       "role": "architecture",
       "topic": "automation",
@@ -609,7 +609,7 @@
     {
       "id": "docs/architecture/posix-core-lane-smoke-workflow.md",
       "relative_path": "docs/architecture/posix-core-lane-smoke-workflow.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/architecture/posix-core-lane-smoke-workflow.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/architecture/posix-core-lane-smoke-workflow.md",
       "priority": "P2",
       "role": "architecture",
       "topic": "workflow",
@@ -638,7 +638,7 @@
     {
       "id": "docs/architecture/posix-linux-compile-gate-workflow.md",
       "relative_path": "docs/architecture/posix-linux-compile-gate-workflow.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/architecture/posix-linux-compile-gate-workflow.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/architecture/posix-linux-compile-gate-workflow.md",
       "priority": "P2",
       "role": "architecture",
       "topic": "workflow",
@@ -665,7 +665,7 @@
     {
       "id": "docs/architecture/posix-regression-suite-workflow.md",
       "relative_path": "docs/architecture/posix-regression-suite-workflow.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/architecture/posix-regression-suite-workflow.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/architecture/posix-regression-suite-workflow.md",
       "priority": "P2",
       "role": "architecture",
       "topic": "automation",
@@ -696,7 +696,7 @@
     {
       "id": "docs/architecture/posix-scaffold-regression-workflow.md",
       "relative_path": "docs/architecture/posix-scaffold-regression-workflow.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/architecture/posix-scaffold-regression-workflow.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/architecture/posix-scaffold-regression-workflow.md",
       "priority": "P2",
       "role": "architecture",
       "topic": "automation",
@@ -725,7 +725,7 @@
     {
       "id": "docs/architecture/server-structure.md",
       "relative_path": "docs/architecture/server-structure.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/architecture/server-structure.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/architecture/server-structure.md",
       "priority": "P2",
       "role": "architecture",
       "topic": "automation",
@@ -753,7 +753,7 @@
     {
       "id": "docs/architecture/wasm-plugin-abi-v3-design.md",
       "relative_path": "docs/architecture/wasm-plugin-abi-v3-design.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/architecture/wasm-plugin-abi-v3-design.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/architecture/wasm-plugin-abi-v3-design.md",
       "priority": "P2",
       "role": "architecture",
       "topic": "wasm",
@@ -784,7 +784,7 @@
     {
       "id": "docs/architecture/wasm-plugin-abi-v3-design.zh-CN.md",
       "relative_path": "docs/architecture/wasm-plugin-abi-v3-design.zh-CN.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/architecture/wasm-plugin-abi-v3-design.zh-CN.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/architecture/wasm-plugin-abi-v3-design.zh-CN.md",
       "priority": "P2",
       "role": "architecture",
       "topic": "wasm",
@@ -815,7 +815,7 @@
     {
       "id": "docs/architecture/wasm-plugin-compatibility.md",
       "relative_path": "docs/architecture/wasm-plugin-compatibility.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/architecture/wasm-plugin-compatibility.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/architecture/wasm-plugin-compatibility.md",
       "priority": "P2",
       "role": "architecture",
       "topic": "wasm",
@@ -842,7 +842,7 @@
     {
       "id": "docs/architecture/wasm-plugin-compatibility.zh-CN.md",
       "relative_path": "docs/architecture/wasm-plugin-compatibility.zh-CN.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/architecture/wasm-plugin-compatibility.zh-CN.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/architecture/wasm-plugin-compatibility.zh-CN.md",
       "priority": "P2",
       "role": "architecture",
       "topic": "wasm",
@@ -869,7 +869,7 @@
     {
       "id": "docs/architecture/windows-launch-at-startup-contract.md",
       "relative_path": "docs/architecture/windows-launch-at-startup-contract.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/architecture/windows-launch-at-startup-contract.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/architecture/windows-launch-at-startup-contract.md",
       "priority": "P2",
       "role": "architecture",
       "topic": "general",
@@ -896,7 +896,7 @@
     {
       "id": "docs/architecture/windows-mouse-companion-phase1-plan.md",
       "relative_path": "docs/architecture/windows-mouse-companion-phase1-plan.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/architecture/windows-mouse-companion-phase1-plan.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/architecture/windows-mouse-companion-phase1-plan.md",
       "priority": "P2",
       "role": "architecture",
       "topic": "wasm",
@@ -930,7 +930,7 @@
     {
       "id": "docs/architecture/windows-mouse-companion-phase15-exit-contract.md",
       "relative_path": "docs/architecture/windows-mouse-companion-phase15-exit-contract.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/architecture/windows-mouse-companion-phase15-exit-contract.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/architecture/windows-mouse-companion-phase15-exit-contract.md",
       "priority": "P2",
       "role": "architecture",
       "topic": "workflow",
@@ -961,7 +961,7 @@
     {
       "id": "docs/architecture/windows-mouse-companion-real-renderer-contract.md",
       "relative_path": "docs/architecture/windows-mouse-companion-real-renderer-contract.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/architecture/windows-mouse-companion-real-renderer-contract.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/architecture/windows-mouse-companion-real-renderer-contract.md",
       "priority": "P2",
       "role": "architecture",
       "topic": "automation",
@@ -998,7 +998,7 @@
     {
       "id": "docs/archive/architecture/README.md",
       "relative_path": "docs/archive/architecture/README.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/archive/architecture/README.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/archive/architecture/README.md",
       "priority": "P3",
       "role": "archive",
       "topic": "general",
@@ -1021,7 +1021,7 @@
     {
       "id": "docs/archive/README.md",
       "relative_path": "docs/archive/README.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/archive/README.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/archive/README.md",
       "priority": "P3",
       "role": "archive",
       "topic": "wasm",
@@ -1046,7 +1046,7 @@
     {
       "id": "docs/automation/automation-mapping-notes.md",
       "relative_path": "docs/automation/automation-mapping-notes.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/automation/automation-mapping-notes.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/automation/automation-mapping-notes.md",
       "priority": "P2",
       "role": "automation",
       "topic": "automation",
@@ -1078,7 +1078,7 @@
     {
       "id": "docs/automation/automation-mapping-todo.zh-CN.md",
       "relative_path": "docs/automation/automation-mapping-todo.zh-CN.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/automation/automation-mapping-todo.zh-CN.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/automation/automation-mapping-todo.zh-CN.md",
       "priority": "P2",
       "role": "automation",
       "topic": "automation",
@@ -1112,7 +1112,7 @@
     {
       "id": "docs/automation/gesture-calibration-baseline.md",
       "relative_path": "docs/automation/gesture-calibration-baseline.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/automation/gesture-calibration-baseline.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/automation/gesture-calibration-baseline.md",
       "priority": "P2",
       "role": "automation",
       "topic": "automation",
@@ -1138,7 +1138,7 @@
     {
       "id": "docs/automation/gesture-debug-ui-notes.md",
       "relative_path": "docs/automation/gesture-debug-ui-notes.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/automation/gesture-debug-ui-notes.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/automation/gesture-debug-ui-notes.md",
       "priority": "P2",
       "role": "automation",
       "topic": "automation",
@@ -1166,7 +1166,7 @@
     {
       "id": "docs/automation/gesture-matching.md",
       "relative_path": "docs/automation/gesture-matching.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/automation/gesture-matching.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/automation/gesture-matching.md",
       "priority": "P2",
       "role": "automation",
       "topic": "automation",
@@ -1197,7 +1197,7 @@
     {
       "id": "docs/marketing/blog-promo.zh-CN.md",
       "relative_path": "docs/marketing/blog-promo.zh-CN.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/marketing/blog-promo.zh-CN.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/marketing/blog-promo.zh-CN.md",
       "priority": "P2",
       "role": "capability",
       "topic": "automation",
@@ -1231,7 +1231,7 @@
     {
       "id": "docs/marketing/README.md",
       "relative_path": "docs/marketing/README.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/marketing/README.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/marketing/README.md",
       "priority": "P2",
       "role": "index",
       "topic": "general",
@@ -1253,7 +1253,7 @@
     {
       "id": "docs/marketing/reddit-posting-playbook.zh-CN.md",
       "relative_path": "docs/marketing/reddit-posting-playbook.zh-CN.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/marketing/reddit-posting-playbook.zh-CN.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/marketing/reddit-posting-playbook.zh-CN.md",
       "priority": "P2",
       "role": "capability",
       "topic": "automation",
@@ -1285,7 +1285,7 @@
     {
       "id": "docs/marketing/reddit-promo-pack.en.md",
       "relative_path": "docs/marketing/reddit-promo-pack.en.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/marketing/reddit-promo-pack.en.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/marketing/reddit-promo-pack.en.md",
       "priority": "P2",
       "role": "capability",
       "topic": "automation",
@@ -1322,7 +1322,7 @@
     {
       "id": "docs/ops/macos-portable-packaging.md",
       "relative_path": "docs/ops/macos-portable-packaging.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/ops/macos-portable-packaging.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/ops/macos-portable-packaging.md",
       "priority": "P2",
       "role": "capability",
       "topic": "wasm",
@@ -1355,7 +1355,7 @@
     {
       "id": "docs/ops/manual-commands.md",
       "relative_path": "docs/ops/manual-commands.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/ops/manual-commands.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/ops/manual-commands.md",
       "priority": "P2",
       "role": "capability",
       "topic": "automation",
@@ -1393,7 +1393,7 @@
     {
       "id": "docs/ops/windows-installer-packaging.md",
       "relative_path": "docs/ops/windows-installer-packaging.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/ops/windows-installer-packaging.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/ops/windows-installer-packaging.md",
       "priority": "P2",
       "role": "capability",
       "topic": "effects",
@@ -1421,7 +1421,7 @@
     {
       "id": "docs/ops/windows-mouse-companion-manual-checklist.md",
       "relative_path": "docs/ops/windows-mouse-companion-manual-checklist.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/ops/windows-mouse-companion-manual-checklist.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/ops/windows-mouse-companion-manual-checklist.md",
       "priority": "P2",
       "role": "capability",
       "topic": "wasm",
@@ -1458,7 +1458,7 @@
     {
       "id": "docs/README.md",
       "relative_path": "docs/README.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/README.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/README.md",
       "priority": "P2",
       "role": "index",
       "topic": "automation",
@@ -1493,7 +1493,7 @@
     {
       "id": "docs/README.zh-CN.md",
       "relative_path": "docs/README.zh-CN.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/README.zh-CN.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/README.zh-CN.md",
       "priority": "P2",
       "role": "index",
       "topic": "automation",
@@ -1530,7 +1530,7 @@
     {
       "id": "docs/refactoring/phase-roadmap-macos-m1-status.md",
       "relative_path": "docs/refactoring/phase-roadmap-macos-m1-status.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/refactoring/phase-roadmap-macos-m1-status.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/refactoring/phase-roadmap-macos-m1-status.md",
       "priority": "P1",
       "role": "first-read",
       "topic": "automation",
@@ -1564,9 +1564,46 @@
       "updated_at": "2026-03-10T10:41:14.953Z"
     },
     {
+      "id": "docs/reviews/2026-07-15-full-project-audit.md",
+      "relative_path": "docs/reviews/2026-07-15-full-project-audit.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/reviews/2026-07-15-full-project-audit.md",
+      "priority": "P2",
+      "role": "capability",
+      "topic": "automation",
+      "first_read_rank": 0,
+      "tags": [
+        "reviews",
+        "full",
+        "project",
+        "audit",
+        "automation",
+        "wasm",
+        "plugin",
+        "effects",
+        "regression",
+        "workflow",
+        "swift",
+        "macos",
+        "windows",
+        "contract",
+        "abi",
+        "routing"
+      ],
+      "summary": "Assess whether the current architecture can safely sustain new capability work under the repository rules: explicit ownership, low coupling, synchronized docs, ",
+      "when_to_read": "Read when task touches automation mapping or gesture recognition.",
+      "line_count": 49,
+      "size_bytes": 9144,
+      "estimated_tokens": 2286,
+      "max_read_tokens": 750,
+      "line_limit": 0,
+      "line_limit_exceeded": false,
+      "hash_sha1": "847afb287e362620e5515c978d7ee200a9ef58d9",
+      "updated_at": "2026-07-15T12:04:12.255Z"
+    },
+    {
       "id": "docs/reviews/2026-07-15-repository-audit.md",
       "relative_path": "docs/reviews/2026-07-15-repository-audit.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/reviews/2026-07-15-repository-audit.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/reviews/2026-07-15-repository-audit.md",
       "priority": "P2",
       "role": "capability",
       "topic": "automation",
@@ -1597,9 +1634,42 @@
       "updated_at": "2026-07-15T11:42:34.596Z"
     },
     {
+      "id": "docs/reviews/2026-07-26-restart-scan.zh-CN.md",
+      "relative_path": "docs/reviews/2026-07-26-restart-scan.zh-CN.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/reviews/2026-07-26-restart-scan.zh-CN.md",
+      "priority": "P2",
+      "role": "capability",
+      "topic": "wasm",
+      "first_read_rank": 0,
+      "tags": [
+        "reviews",
+        "restart",
+        "scan",
+        "zh",
+        "cn",
+        "wasm",
+        "effects",
+        "workflow",
+        "swift",
+        "macos",
+        "windows",
+        "linux"
+      ],
+      "summary": "| 区域 | 文件数 | 行数 | 说明 |",
+      "when_to_read": "Read when task touches wasm runtime, plugin ABI, or sample behavior.",
+      "line_count": 62,
+      "size_bytes": 5199,
+      "estimated_tokens": 1300,
+      "max_read_tokens": 750,
+      "line_limit": 0,
+      "line_limit_exceeded": false,
+      "hash_sha1": "7332ef512977346b72a5e264a0a741ff8ecfa690",
+      "updated_at": "2026-07-26T09:09:26.901Z"
+    },
+    {
       "id": "docs/TODO.md",
       "relative_path": "docs/TODO.md",
-      "absolute_path": "/Users/sunqin/study/language/cpp/code/MFCMouseEffect/docs/TODO.md",
+      "absolute_path": "/sessions/quirky-busy-lamport/mnt/MFCMouseEffect/docs/TODO.md",
       "priority": "P2",
       "role": "capability",
       "topic": "automation",
@@ -1607,23 +1677,22 @@
       "tags": [
         "todo",
         "automation",
-        "regression",
+        "wasm",
+        "effects",
         "macos",
         "windows",
-        "linux",
-        "contract",
-        "abi"
+        "linux"
       ],
-      "summary": "Status source of truth for cross-capability work. Capability documents retain their details but must link back here when they create a follow-up.",
+      "summary": "跨能力工作的唯一状态源。能力文档保留细节，但产生后续事项时必须回链到这里。",
       "when_to_read": "Read when task touches automation mapping or gesture recognition.",
-      "line_count": 28,
-      "size_bytes": 2270,
-      "estimated_tokens": 568,
-      "max_read_tokens": 688,
+      "line_count": 38,
+      "size_bytes": 4568,
+      "estimated_tokens": 1142,
+      "max_read_tokens": 750,
       "line_limit": 0,
       "line_limit_exceeded": false,
-      "hash_sha1": "6ddcce38648043ada1266a4650ffab6ba8a24204",
-      "updated_at": "2026-07-15T11:41:53.625Z"
+      "hash_sha1": "61fb0de9e1cad44d370137cfe93b82b1ae05140c",
+      "updated_at": "2026-07-26T09:10:02.821Z"
     }
   ]
 }

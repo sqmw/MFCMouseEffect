@@ -1,27 +1,37 @@
 # Project Main TODO
 
-Status source of truth for cross-capability work. Capability documents retain their details but must link back here when they create a follow-up.
+跨能力工作的唯一状态源。能力文档保留细节，但产生后续事项时必须回链到这里。
+（2026-07-26 全量扫描复核：7-15 审计事项基本全部未动，状态与优先级已按 `docs/reviews/2026-07-26-restart-scan.zh-CN.md` 刷新。）
 
 ## Current
 
-| Status | Item | Acceptance / next step | Related material |
+| 状态 | 事项 | 验收 / 下一步 | 相关材料 |
 | --- | --- | --- | --- |
-| pending | Full regression execution | Run `make check` in an external terminal, then record macOS/Linux results. | `docs/reviews/2026-07-15-repository-audit.md` |
-| pending | Windows build validation | Confirm Syncthing freshness, then run `make build-windows` from the synced Windows workspace. | `docs/reviews/2026-07-15-repository-audit.md` |
-| pending | Oversized owned modules | Triage bounded SRP refactors for the audit candidates before adding more behavior to them. | `docs/reviews/2026-07-15-repository-audit.md` |
-| pending | P1 context compaction | Reduce `docs/agent-context/current.md` to its 220-line budget without discarding current contracts. | `docs/reviews/2026-07-15-repository-audit.md` |
-| in_progress | Automation mapping capability | Continue only through its scoped roadmap; copy new cross-capability follow-ups here. | `docs/automation/automation-mapping-todo.zh-CN.md` |
+| blocking | P0 生命周期所有权 | 消除 stdin IPC（`IpcController` detach + 裸 `this`）与 WebSettings 关停（`TokenMonitor.StopAsync` detach lambda）的 use-after-free 路径；macOS 伴宠桥接需专项验证异步 hide 与 release 的主线程顺序；各加 ASan 回归。 | `docs/reviews/2026-07-26-restart-scan.zh-CN.md` |
+| pending | 收尾提交，恢复干净工作区 | 将 7-15 / 7-26 两份复盘、本文件、`docs/.ai` 索引对一起提交；同时处理与 AGENTS 规则冲突的根目录 `windows-manual-handoff.tmp`。 | `docs/reviews/2026-07-26-restart-scan.zh-CN.md` |
+| pending | macOS dispatch 生命周期 | `SendSync`、timer、析构收敛到统一状态机；补 TSAN 竞态覆盖。 | `docs/reviews/2026-07-15-full-project-audit.md` |
+| pending | WASM retained 状态配额 | 按插件/surface 限制 group 与 retained 实例数量，加 TTL/诊断，测试配额耗尽。 | `docs/reviews/2026-07-15-full-project-audit.md` |
+| pending | WebUI 产物确定性 + i18n 回归 | 统一 bundle 清单（Vite/resolver/copy/package 共用）；清理 `WebUI/` 陈旧 `cursor-decoration-settings.svelte.js` 及 resolver 强依赖；修复 `EffectsBlacklistFields.svelte` 的 `window.MfxI18n` 失效读取并加中英文回归。 | `docs/reviews/2026-07-26-restart-scan.zh-CN.md` |
+| pending | Windows 构建与 Syncthing 边界 | `vswhere`/多版本探测 MSBuild；`.stignore` 补嵌套 `WebUIWorkspace`、`examples` 的 `node_modules/dist` 忽略；统一 `F:\` vs `D:\` 镜像路径口径；然后在当前同步工作区跑一次真实 Windows 构建 + 冒烟。 | `docs/reviews/2026-07-26-restart-scan.zh-CN.md` |
+| pending | CI 与发布信任链 | 最小干净环境 CI 矩阵；单一版本源 + tag/commit/产物映射；签名/公证决策落文档。 | `docs/reviews/2026-07-15-full-project-audit.md` |
+| pending | 有界架构拆分 | 在向 `AppController`（.h 1274 行）、伴宠诊断、Mouse Companion WebUI（2406 行）加行为前，先批准分阶段兼容拆分方案。 | `docs/reviews/2026-07-15-full-project-audit.md` |
+| pending | 本地控制面与无障碍加固 | 设置 token / probe 文件卫生；补齐 dialog/tab/mapping 键盘契约与回归。 | `docs/reviews/2026-07-15-full-project-audit.md` |
+| pending | 活跃文档路径与 P1 上下文瘦身 | 替换过时绝对路径 / Windows 盘符（`current.md:9` 的 `F:\` 等）；`current.md` 从 231 行压回 220 行预算。 | `docs/reviews/2026-07-15-full-project-audit.md` |
+| pending | 全量回归执行 | 外部终端跑 `make check`，记录 macOS/Linux 结果。 | `docs/reviews/2026-07-15-full-project-audit.md` |
+| in_progress | Automation mapping 能力 | 仅经其范围内路线图推进；新的跨能力后续事项复制到本表。 | `docs/automation/automation-mapping-todo.zh-CN.md` |
 
 ## Risks / constraints
 
-- Full `make check` is a high-load command. Use its component targets for low-cost validation; run the full suite from an external terminal when a complete regression pass is required.
-- macOS is the primary workspace. The Windows mirror is `D:\language\cpp\code\MFCMouseEffect`; confirm Syncthing freshness before Windows-only builds.
+- `make check` 为高负载命令：日常用分项目标验证，需要完整回归时在外部终端执行。
+- macOS 为主工作区；Windows 镜像路径当前口径不一致（`F:\` vs `D:\`），Windows 构建前先确认 Syncthing 新鲜度并统一口径。
+- 未经用户明确批准不得清理 `.git` 内 Finder 元数据；这是仓库健康项，不属于功能工作。
 
 ## Archive
 
-Completed items move here with date, outcome, validation, relevant commit, and remaining risk.
+完成项移到这里，附日期、结果、验证、相关提交与残余风险。
 
-| Date | Item | Outcome / validation | Remaining risk |
+| 日期 | 事项 | 结果 / 验证 | 残余风险 |
 | --- | --- | --- | --- |
-| 2026-07-15 | Unified Makefile entrypoints | Added documented, thin `build/test/check/package/audit` targets; verified help and all underlying command-help dispatches, `make audit`, WebUI tests, and CMake configure. | Full native regression and Windows build remain pending above. |
-| 2026-07-15 | Repository-wide static audit | Reviewed tracked source plus current WebUI diff; shell/Node syntax checks, security-pattern scan, CMake configure, and targeted surface gates completed. | Dynamic full-suite and Windows coverage remain pending above. |
+| 2026-07-26 | 全量扫描复核（只读） | 复核 7-15 审计全部条目：P0×2 原样存在、伴宠桥接部分收敛待验证、P1/P2/P3 基本未动；产出 `docs/reviews/2026-07-26-restart-scan.zh-CN.md` 并刷新本表。 | 动态回归与 Windows 构建仍未执行（见上表）。 |
+| 2026-07-15 | 统一 Makefile 入口 | 新增文档化薄 `build/test/check/package/audit` 目标；已验证 help、命令分发、`make audit`、WebUI 测试与 CMake configure。 | 全量原生回归与 Windows 构建仍待执行。 |
+| 2026-07-15 | 仓库级静态审计 | 覆盖跟踪源码 + 当前 WebUI diff；shell/Node 语法检查、安全模式扫描、CMake configure、定向 surface 门禁通过。 | 动态全量与 Windows 覆盖仍待执行。 |
