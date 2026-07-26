@@ -55,8 +55,8 @@ Include short evidence (code path/config/runtime behavior). If user-visible beha
   - macOS workspace is the primary development source
   - Windows workspace is used for build / run / visual validation
   - do not tell the user to manually copy the latest code to Windows when the task is part of the normal sync workflow
-- Default Windows path assumption for commands:
-  - `F:\language\cpp\code\MFCMouseEffect`
+- Default Windows path assumption for commands (single source of truth for the mirror path):
+  - `D:\language\cpp\code\MFCMouseEffect`
 - When giving Windows manual commands, prefer the synced Windows workspace path directly instead of a generic placeholder path unless the user asks otherwise.
 - Treat sync-specific issues as workflow issues first:
   - if Windows sees unexpected local changes, conflict files, or failed items, consider Syncthing state / ignore rules / receive-only behavior before blaming code changes

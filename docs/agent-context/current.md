@@ -6,7 +6,7 @@
 - Primary host: macOS.
 - Delivery order: macOS first, Windows regression-free, Linux compile/contract-level.
 - macOS stack rule: new capability modules are Swift-first; avoid expanding `.mm` for large new modules.
-- Cross-machine workflow: macOS is the development source, Windows is the synced validation workspace via `Syncthing`, and Windows-side command execution should default to direct SSH against `F:\language\cpp\code\MFCMouseEffect`.
+- Cross-machine workflow: macOS is the development source, Windows is the synced validation workspace via `Syncthing`; Windows-side commands default to direct SSH against the mirror path recorded in `AGENTS.md` (single source).
 ## Active Product Goals
 - Keep wasm runtime bounded-but-expressive with host-owned render boundaries.
 - Keep plugin lanes decoupled (`effects` vs `indicator`) with explicit diagnostics.
@@ -40,6 +40,7 @@
 - Timed macOS manual runs must submit a matching `launchctl` stopper job for auto-stop; a shell background sleeper can disappear with the wrapper, and killing only the child pid can leave launchd-managed debug smoke sessions alive after `--seconds/--minutes`.
 - `Automation Mapping` must stay Vite-dev-safe end to end: the editor no longer calls Svelte 5 exported methods through `instance[name]()` and instead exposes plain `read/validate` closures via `onReady(api)`, mapping row add/remove/change/template actions now stay on one standard component-event channel (no mixed callback+event bridge), and the live-debug summary/card mount re-syncs through `syncMountedComponent(...)` with a short dev-only deferred refresh so `Apply`, `Reload`, row mutations, and `./mfx start --debug` keep using the latest debug-panel layout without private-field or stale shell/HMR mounts.
 - Automation action-list adders (`Add shortcut / delay / URL / app`) now dispatch a shared `addaction` component event from `MappingActionListEditor`, `MappingShortcutPanel -> MappingPanel` keep that path event-based end to end, and `MappingActionListEditor` binds `row.actions` to an explicit reactive `actions` view-model before rendering the empty-state / action-card list. This avoids silent no-op add-action clicks caused by callback drift or by Svelte 5 hiding nested prop reactivity behind helper functions.
+- WebUI build artifacts have one manifest source of truth: `WebUIWorkspace/scripts/webui-bundle-manifest.mjs` feeds `vite.config.js`, `copy-output.mjs` (which also purges unmanaged retired `js/css/html` from `WebUI/` and runtime webui dirs), and the `test:webui-bundle-manifest` contract test; the C++ resolver required-asset list must stay a subset of it, and the retired `cursor-decoration-settings.svelte.js` is no longer required or shipped.
 - Static WebUI builds now inline Svelte component CSS into each generated section bundle during `vite build`; the desktop runtime still links a single `WebUI/styles.css`, so extracted `dist/*.svelte.css` files caused `Automation Mapping` / workspace layout refinements to appear in `pnpm run dev` but disappear in compiled settings builds.
 - Vite `/api/*` proxy forwarding in source-mode debug now buffers request bodies before `fetch(...)` forwarding. Passing raw Node request streams to Undici can surface `{"ok":false,"error":"terminated"}` on `POST /api/reload` and `POST /api/state`; buffered forwarding keeps `Apply/Reload` stable in `--debug`.
 - Vite dev proxy now also injects `X-MFCMouseEffect-Token` from the probe runtime when the client omits it, so dev helpers that only carry `?token=` won't silently trip backend authorization.
@@ -93,25 +94,10 @@
 #### Windows `wasm_v1` Semantics Summary
 - `builtin_passthrough` keeps host-generated semantics and only accepts bounded tuning plus optional `combo_preset_override`.
 - `wasm_v1` is the first bounded renderer-owned semantics patch lane.
-- `wasm_v1` host apply order is fixed:
-  - `theme`
-  - `shape` (`frame / face / appendage`)
-  - `motion`
-  - `mood`
-- Current `wasm_v1` patch categories:
-  - `theme`: glow/body/head/accent/accessory/pedestal color family
-  - `shape`: body/head proportions, muzzle/forehead/whisker detail, ear/tail/follow-ear/click-ear detail
-  - `motion`: `follow / click / drag / hold / scroll` main action multipliers
-  - `mood`: glow/accent/shadow/pedestal tinting and alpha lanes, plus `hold / drag / scroll / follow` overlay emphasis
-- Current design intent:
-  - keep the lane bounded and host-owned
-  - prefer adding high-value fields over reopening builder-local hardcoding
-  - do not turn `wasm_v1` into an unrestricted free-form renderer ABI yet
-- Checked-in `wasm_v1` sidecar samples are now also curated by readability intent:
-  - default sample: balanced default-candidate baseline
-  - agile sample: cooler / sharper `follow / drag`
-  - dreamy sample: brighter / floatier `follow / scroll`
-  - charming sample: rounder / warmer `click / hold`
+- `wasm_v1` host apply order is fixed: `theme` -> `shape` (`frame / face / appendage`) -> `motion` -> `mood`.
+- Current `wasm_v1` patch categories: `theme` (glow/body/head/accent/accessory/pedestal color family), `shape` (body/head proportions, muzzle/forehead/whisker, ear/tail/follow-ear/click-ear detail), `motion` (`follow / click / drag / hold / scroll` main action multipliers), `mood` (glow/accent/shadow/pedestal tinting + alpha lanes, plus `hold / drag / scroll / follow` overlay emphasis).
+- Design intent: keep the lane bounded and host-owned; prefer adding high-value fields over builder-local hardcoding; do not turn `wasm_v1` into an unrestricted free-form renderer ABI yet.
+- Checked-in `wasm_v1` sidecar samples are curated by readability intent: default (balanced baseline), agile (cooler/sharper `follow / drag`), dreamy (brighter/floatier `follow / scroll`), charming (rounder/warmer `click / hold`).
 - checked-in sidecars now declare `style_intent` and `sample_tier`, and `wasm_v1` also covers `face.brow_tilt_scale / mouth_reactive_scale`, `appendage.follow_leg_stance_scale / hold_leg_stance_scale / drag_hand_reach_scale`, `motion.body_forward_scale`, and `mood.pedestal_tint_mix_scale / click_ring_alpha_scale`, so host/runtime no longer rely only on combo-preset inference and `follow / drag / hold / click` gain stronger structure + mood readability on Win pet.
 
 #### Windows Bring-Up / Validation
@@ -119,16 +105,7 @@
 - Renderer lane matrix now also accepts `-WasmV1Style default|agile|dreamy|charming`, so the third lane can switch between the checked-in curated `wasm_v1` samples without manual sidecar replacement.
 - Renderer lane matrix now also accepts `-AllWasmV1Styles`, which expands the third lane into `wasm_v1_default / wasm_v1_agile / wasm_v1_dreamy / wasm_v1_charming` and emits separate proof artifacts for each style.
 - Checked-in samples exist at `tools/platform/manual/lib/windows-mouse-companion-renderer-sidecar.sample.json` and `tools/platform/manual/lib/windows-mouse-companion-renderer-sidecar.wasm-v1.sample.json`.
-- Lane matrix now emits per-lane proof json plus `summary.json`, `summary.md`, and `observation-template.md`; summary also emits:
-  - compact lane verdicts
-  - per-lane default-lane snapshots
-  - per-lane configured sample metadata
-  - per-lane runtime sample-tier snapshot
-  - compare-vs-builtin summary
-  - per-lane `style` + `style_focus_profile`
-  - conservative `recommended_default_lane`
-  - `recommendation_style_intent` / `recommendation_style_focus_profile` / `recommended_sample_path`
-  - `rollout_contract_status`
+- Lane matrix now emits per-lane proof json plus `summary.json`, `summary.md`, and `observation-template.md`; summary also carries lane verdicts, per-lane default-lane/sample/tier snapshots, compare-vs-builtin, per-lane `style` + `style_focus_profile`, conservative `recommended_default_lane`, `recommendation_style_intent / recommendation_style_focus_profile / recommended_sample_path`, and `rollout_contract_status`.
 - Default lane rollout contract: machine summary may nominate a candidate, but actual default switch still requires later manual confirmation.
 - Runtime diagnostics now expose both lane and scene-runtime state directly: `default_lane_candidate / source / rollout_status / style_intent / candidate_tier`, `appearance_plugin_sample_tier`, `appearance_plugin_contract_brief`, plus `scene_runtime_adapter_mode / pose_sample_count / bound_pose_sample_count / model_asset_source_brief / model_asset_manifest_brief / model_scene_adapter_brief / model_node_adapter_influence / model_node_adapter_brief / pose_adapter_influence / pose_readability_bias / pose_adapter_brief`; adapter modes are fixed to `runtime_only | pose_unbound | pose_bound`.
 - `pose_bound` is now visible across appendage, motion/head-body, frame/face anchors, overlay/grounding, and painter readability: beyond geometry, it can also raise shadow/pedestal alpha, strengthen accessory stroke/fill, and make pose badges/overlays read more confidently than `runtime_only / pose_unbound`.
