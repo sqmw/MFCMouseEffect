@@ -7,9 +7,14 @@
     catalogMetaText,
     scopeFileAccept as resolveScopeFileAccept,
   } from "../automation/mapping-panel-helpers.js";
+  import { textOf } from "../automation/model.js";
+  import { webUiText } from "./web-i18n-text.js";
 
   export let apps = [];
   export let platform = "windows";
+  // Optional pre-resolved text table (same shape as AutomationEditor's
+  // `i18n` prop). When absent, fall back to the runtime catalog adapter.
+  export let i18n = null;
 
   const dispatch = createEventDispatcher();
 
@@ -45,10 +50,10 @@
   }
 
   function text(fallback, key) {
-    if (typeof window === "undefined" || !window?.MfxI18n) {
-      return fallback;
+    if (i18n && typeof i18n === "object") {
+      return textOf(i18n, key, fallback);
     }
-    return window.MfxI18n[key] || fallback;
+    return webUiText(key, fallback);
   }
 
   $: normalizedApps = normalizeApps(apps);
