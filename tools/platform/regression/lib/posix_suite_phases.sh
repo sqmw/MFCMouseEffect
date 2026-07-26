@@ -137,25 +137,13 @@ mfx_posix_suite_run_macos_automation_injection_selfcheck_phase() {
 
 mfx_posix_suite_run_macos_tray_theme_selfcheck_phase() {
     local repo_root="$1"
-    if [[ "$MFX_SKIP_MACOS_TRAY_THEME_SELFCHECK" -eq 1 ]]; then
-        mfx_info "skip macos tray theme selfcheck phase"
-        return
-    fi
-    if ! mfx_posix_suite_is_macos_host; then
-        mfx_info "skip macos tray theme selfcheck phase (non-macos host)"
-        return
-    fi
-
-    local args=("--skip-build")
-    local resolved_build_dir
-    resolved_build_dir="$(_mfx_posix_suite_resolve_core_build_dir)"
-    if [[ -n "$resolved_build_dir" ]]; then
-        args+=("--build-dir" "$resolved_build_dir")
-    fi
-
-    mfx_info "run macos tray theme selfcheck phase"
-    MFX_MANUAL_ALLOW_BIND_EACCES_SKIP="${MFX_MANUAL_ALLOW_BIND_EACCES_SKIP:-1}" \
-        "$repo_root/tools/platform/manual/run-macos-tray-theme-selfcheck.sh" "${args[@]}"
+    # Retired with the tray-menu streamline: the tray no longer exposes
+    # theme selection, and the Swift bridge dropped the
+    # MFX_TEST_TRAY_AUTO_TRIGGER_THEME_VALUE hook this selfcheck drives.
+    # Theme apply/persistence stays covered by the /api/state contract
+    # checks in the automation contract regression.
+    mfx_info "skip macos tray theme selfcheck phase (tray theme selection retired with streamlined tray menu)"
+    return
 }
 
 mfx_posix_suite_run_macos_automation_app_scope_selfcheck_phase() {

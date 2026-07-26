@@ -393,14 +393,14 @@ _mfx_core_http_automation_contract_effect_overlay_checks() {
     mfx_assert_file_contains "$tmp_dir/effect-render-profile-probe.out" "\"input\":\"stream\",\"normalized\":\"streamer\"" "core effect render profile probe trail stream alias"
     mfx_assert_file_contains "$tmp_dir/effect-render-profile-probe.out" "\"input\":\"scifi\",\"normalized\":\"tubes\"" "core effect render profile probe trail scifi alias"
     mfx_assert_file_contains "$tmp_dir/effect-render-profile-probe.out" "\"input\":\"stardust\",\"normalized\":\"twinkle\"" "core effect render profile probe scroll stardust alias"
-    mfx_assert_file_contains "$tmp_dir/effect-render-profile-probe.out" "\"input\":\"none\",\"normalized\":\"arrow\"" "core effect render profile probe scroll none alias"
+    mfx_assert_file_contains "$tmp_dir/effect-render-profile-probe.out" "\"input\":\"none\",\"normalized\":\"none\"" "core effect render profile probe scroll none passthrough (none is a first-class disable value)"
     mfx_assert_file_contains "$tmp_dir/effect-render-profile-probe.out" "\"input\":\"suspension\",\"normalized\":\"tubes\"" "core effect render profile probe hover suspension alias"
-    mfx_assert_file_contains "$tmp_dir/effect-render-profile-probe.out" "\"input\":\"none\",\"normalized\":\"glow\"" "core effect render profile probe hover none alias"
+    mfx_assert_file_contains "$tmp_dir/effect-render-profile-probe.out" "\"input\":\"none\",\"normalized\":\"none\"" "core effect render profile probe hover none passthrough (none is a first-class disable value)"
     mfx_assert_file_contains "$tmp_dir/effect-render-profile-probe.out" "\"input\":\"hold_neon3d_gpu_v2\",\"normalized\":\"hold_quantum_halo_gpu_v2\"" "core effect render profile probe hold legacy alias"
     mfx_assert_file_contains "$tmp_dir/effect-render-profile-probe.out" "\"input\":\"scifi3d\",\"normalized\":\"hologram\"" "core effect render profile probe hold scifi3d alias"
     mfx_assert_file_contains "$tmp_dir/effect-render-profile-probe.out" "\"input\":\"neon3d\",\"normalized\":\"hold_neon3d\"" "core effect render profile probe hold neon3d alias"
     mfx_assert_file_contains "$tmp_dir/effect-render-profile-probe.out" "\"hold_follow_mode\":" "core effect render profile probe hold follow mode alias matrix section"
-    mfx_assert_file_contains "$tmp_dir/effect-render-profile-probe.out" "\"input\":\"none\",\"normalized\":\"ripple\"" "core effect render profile probe click none alias"
+    mfx_assert_file_contains "$tmp_dir/effect-render-profile-probe.out" "\"input\":\"none\",\"normalized\":\"none\"" "core effect render profile probe click none passthrough (none is a first-class disable value)"
     mfx_assert_file_contains "$tmp_dir/effect-render-profile-probe.out" "\"input\":\"none\",\"normalized\":\"none\"" "core effect render profile probe trail none alias"
     mfx_assert_file_contains "$tmp_dir/effect-render-profile-probe.out" "\"input\":\"default\",\"normalized\":\"line\"" "core effect render profile probe trail default alias"
     mfx_assert_file_contains "$tmp_dir/effect-render-profile-probe.out" "\"input\":\"cursor_priority\",\"normalized\":\"smooth\"" "core effect render profile probe hold follow cursor_priority alias"
@@ -761,24 +761,26 @@ _mfx_core_http_automation_contract_effect_overlay_checks() {
         -H "x-mfcmouseeffect-token: $token")"
     mfx_assert_eq "$code_effect_profile_probe_none_fallback_modes" "200" "core effect set none-fallback modes render profile probe status"
 
+    # Contract update: "none" is a first-class disable value and is honored
+    # as-is; it no longer falls back to each channel's default type.
     _mfx_core_http_automation_assert_active_and_command_type \
         "$tmp_dir/effect-render-profile-probe-none-fallback-modes.out" \
         "click" \
-        "ripple" \
-        "ripple" \
-        "core effect render profile none fallback click"
+        "none" \
+        "none" \
+        "core effect render profile none passthrough click"
     _mfx_core_http_automation_assert_active_and_command_type \
         "$tmp_dir/effect-render-profile-probe-none-fallback-modes.out" \
         "scroll" \
-        "arrow" \
-        "arrow" \
-        "core effect render profile none fallback scroll"
+        "none" \
+        "none" \
+        "core effect render profile none passthrough scroll"
     _mfx_core_http_automation_assert_active_and_command_type \
         "$tmp_dir/effect-render-profile-probe-none-fallback-modes.out" \
         "hover" \
-        "glow" \
-        "glow" \
-        "core effect render profile none fallback hover"
+        "none" \
+        "none" \
+        "core effect render profile none passthrough hover"
     _mfx_core_http_automation_assert_command_flag_eq \
         "$tmp_dir/effect-render-profile-probe-none-fallback-modes.out" \
         "scroll" \
