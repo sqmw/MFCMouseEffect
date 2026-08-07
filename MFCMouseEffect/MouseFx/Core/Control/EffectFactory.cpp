@@ -32,7 +32,7 @@ namespace mousefx {
 namespace {
 
 #if MFX_PLATFORM_WINDOWS
-using EffectCreator = std::unique_ptr<IMouseEffect> (*)(const std::string& type, const EffectConfig& config);
+using EffectCreator = std::unique_ptr<IMouseEffect> (*)(const std::string& type, const EffectConfig& config, AppController* controller);
 
 struct CategoryRegistryEntry {
     std::unordered_map<std::string, EffectCreator> typedCreators{};
@@ -43,34 +43,35 @@ constexpr size_t CategoryIndex(EffectCategory category) {
     return static_cast<size_t>(category);
 }
 
-std::unique_ptr<IMouseEffect> CreateClickRipple(const std::string&, const EffectConfig& config) {
+std::unique_ptr<IMouseEffect> CreateClickRipple(const std::string&, const EffectConfig& config, AppController*) {
     return std::make_unique<RippleEffect>(config.theme, config);
 }
 
-std::unique_ptr<IMouseEffect> CreateClickStar(const std::string&, const EffectConfig& config) {
+std::unique_ptr<IMouseEffect> CreateClickStar(const std::string&, const EffectConfig& config, AppController*) {
     return std::make_unique<IconEffect>(config.theme, config);
 }
 
-std::unique_ptr<IMouseEffect> CreateClickText(const std::string&, const EffectConfig& config) {
+std::unique_ptr<IMouseEffect> CreateClickText(const std::string&, const EffectConfig& config, AppController*) {
     return std::make_unique<TextEffect>(config.textClick, config.theme);
 }
 
-std::unique_ptr<IMouseEffect> CreateTrailParticle(const std::string&, const EffectConfig& config) {
+std::unique_ptr<IMouseEffect> CreateTrailParticle(const std::string&, const EffectConfig& config, AppController*) {
     return std::make_unique<ParticleTrailEffect>(config);
 }
 
-std::unique_ptr<IMouseEffect> CreateTrailGeneric(const std::string& type, const EffectConfig& config) {
+std::unique_ptr<IMouseEffect> CreateTrailGeneric(const std::string& type, const EffectConfig& config, AppController* controller) {
     return std::make_unique<TrailEffect>(
         config.theme,
         type,
-        config);
+        config,
+        controller);
 }
 
-std::unique_ptr<IMouseEffect> CreateScroll(const std::string& type, const EffectConfig& config) {
+std::unique_ptr<IMouseEffect> CreateScroll(const std::string& type, const EffectConfig& config, AppController*) {
     return std::make_unique<ScrollEffect>(config, type);
 }
 
-std::unique_ptr<IMouseEffect> CreateHold(const std::string& type, const EffectConfig& config) {
+std::unique_ptr<IMouseEffect> CreateHold(const std::string& type, const EffectConfig& config, AppController*) {
     return std::make_unique<HoldEffect>(
         config.theme,
         type,
@@ -78,7 +79,7 @@ std::unique_ptr<IMouseEffect> CreateHold(const std::string& type, const EffectCo
         config.holdPresenterBackend);
 }
 
-std::unique_ptr<IMouseEffect> CreateHover(const std::string& type, const EffectConfig& config) {
+std::unique_ptr<IMouseEffect> CreateHover(const std::string& type, const EffectConfig& config, AppController*) {
     return std::make_unique<HoverEffect>(config.theme, type);
 }
 
@@ -131,7 +132,7 @@ std::string NormalizeRequestedEffectType(EffectCategory category, const std::str
 
 } // namespace
 
-std::unique_ptr<IMouseEffect> EffectFactory::Create(EffectCategory category, const std::string& type, const EffectConfig& config) {
+std::unique_ptr<IMouseEffect> EffectFactory::Create(EffectCategory category, const std::string& type, const EffectConfig& config, AppController* controller) {
     if (type == "none" || type.empty()) {
         return nullptr;
     }
@@ -148,10 +149,10 @@ std::unique_ptr<IMouseEffect> EffectFactory::Create(EffectCategory category, con
     }
     const auto& categoryRegistry = registryTable[idx];
     if (const auto it = categoryRegistry.typedCreators.find(normalizedType); it != categoryRegistry.typedCreators.end()) {
-        return it->second(normalizedType, config);
+        return it->second(normalizedType, config, controller);
     }
     if (categoryRegistry.fallbackCreator != nullptr) {
-        return categoryRegistry.fallbackCreator(normalizedType, config);
+        return categoryRegistry.fallbackCreator(normalizedType, config, controller);
     }
 
 #ifdef _DEBUG

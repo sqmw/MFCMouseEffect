@@ -127,6 +127,8 @@ intptr_t DispatchRouter::OnMove(const DispatchMessage& message) {
 #else
     ctrl_->RememberLastPointerPoint(pt);
 #endif
+    // 更新鼠标速度
+    ctrl_->UpdateMouseSpeed(pt);
     const bool effectsBlockedByAppBlacklist = SyncCursorDecorationBlacklistState(ctrl_, pt);
     if (!effectsBlockedByAppBlacklist) {
         ctrl_->IndicatorOverlay().OnMove(pt);

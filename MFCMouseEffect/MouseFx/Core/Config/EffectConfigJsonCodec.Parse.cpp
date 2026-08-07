@@ -69,6 +69,27 @@ void ApplyRootToConfig(const nlohmann::json& root, EffectConfig& config) {
     }
     config.effectConflictPolicy = config_internal::SanitizeEffectConflictPolicyConfig(config.effectConflictPolicy);
 
+    if (root.contains(keys::kSpeedAdaptive) && root[keys::kSpeedAdaptive].is_object()) {
+        const auto& speedAdaptive = root[keys::kSpeedAdaptive];
+        config.speedAdaptive.enableSpeedAdaptive = parse_internal::GetOr<bool>(
+            speedAdaptive,
+            keys::speed_adaptive::kEnableSpeedAdaptive,
+            config.speedAdaptive.enableSpeedAdaptive);
+        config.speedAdaptive.minIntensity = parse_internal::GetOr<float>(
+            speedAdaptive,
+            keys::speed_adaptive::kMinIntensity,
+            config.speedAdaptive.minIntensity);
+        config.speedAdaptive.maxIntensity = parse_internal::GetOr<float>(
+            speedAdaptive,
+            keys::speed_adaptive::kMaxIntensity,
+            config.speedAdaptive.maxIntensity);
+        config.speedAdaptive.sensitivity = parse_internal::GetOr<float>(
+            speedAdaptive,
+            keys::speed_adaptive::kSensitivity,
+            config.speedAdaptive.sensitivity);
+    }
+    config.speedAdaptive = config_internal::SanitizeSpeedAdaptiveConfig(config.speedAdaptive);
+
     if (root.contains(keys::kMouseCompanion) && root[keys::kMouseCompanion].is_object()) {
         const auto& companion = root[keys::kMouseCompanion];
         config.mouseCompanion.enabled = parse_internal::GetOr<bool>(

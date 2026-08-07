@@ -10,14 +10,15 @@
 #include "MouseFx/Renderers/Trail/MeteorRenderer.h"
 #include "Platform/PlatformEffectFallbackFactory.h"
 #include "MouseFx/Utils/TimeUtils.h"
+#include "MouseFx/Core/Control/AppController.h"
 #include <algorithm>
 #include <cctype>
 #include <string>
 
 namespace mousefx {
 
-TrailEffect::TrailEffect(const std::string& themeName, const std::string& type, const EffectConfig& config)
-    : fallback_(platform::CreateTrailEffectFallback()), type_(type) {
+TrailEffect::TrailEffect(const std::string& themeName, const std::string& type, const EffectConfig& config, AppController* controller)
+    : fallback_(platform::CreateTrailEffectFallback()), type_(type), controller_(controller) {
     type_ = NormalizeTrailEffectType(type_);
     isChromatic_ = (ToLowerAscii(themeName) == "chromatic");
     const TrailHistoryProfile history = config.GetTrailHistoryProfile(type_);
@@ -73,12 +74,19 @@ void TrailEffect::OnMouseMove(const ScreenPoint& pt) {
         return;
     }
 
+    // 获取速度自适应强度
+    double speedAdaptiveIntensity = 1.0;
+    if (controller_) {
+        speedAdaptiveIntensity = controller_->GetSpeedAdaptiveIntensity();
+    }
+    
     const TrailEffectRenderCommand command = ComputeTrailEffectRenderCommand(
         pt,
         emission.deltaX,
         emission.deltaY,
         type_,
-        computeProfile_);
+        computeProfile_,
+        speedAdaptiveIntensity);
     // Keep the anchor at the last emitted point so small moves can
     // accumulate into visible segments instead of being discarded.
     lastPoint_ = pt;

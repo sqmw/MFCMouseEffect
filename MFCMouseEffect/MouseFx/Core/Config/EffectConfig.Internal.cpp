@@ -511,6 +511,26 @@ WasmConfig SanitizeWasmConfig(WasmConfig config) {
     return config;
 }
 
+SpeedAdaptiveConfig SanitizeSpeedAdaptiveConfig(SpeedAdaptiveConfig config) {
+    // 不需要清理enableSpeedAdaptive，它是布尔值
+    
+    // 清理minIntensity，确保在0.0到1.0之间
+    config.minIntensity = ClampFloat(config.minIntensity, 0.0f, 1.0f);
+    
+    // 清理maxIntensity，确保在0.0到2.0之间（留一些余量）
+    config.maxIntensity = ClampFloat(config.maxIntensity, 0.0f, 2.0f);
+    
+    // 确保maxIntensity不小于minIntensity
+    if (config.maxIntensity < config.minIntensity) {
+        config.maxIntensity = config.minIntensity;
+    }
+    
+    // 清理sensitivity，确保在0.0到1.0之间
+    config.sensitivity = ClampFloat(config.sensitivity, 0.0f, 1.0f);
+    
+    return config;
+}
+
 std::string ReadFileAsUtf8(const std::wstring& path) {
     // std::filesystem::path bridges wstring -> native path on every
     // platform; libc++ has no wstring ifstream constructor (MSVC extension).

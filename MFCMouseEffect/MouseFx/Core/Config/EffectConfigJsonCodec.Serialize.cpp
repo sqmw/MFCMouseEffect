@@ -71,6 +71,12 @@ nlohmann::json BuildRootFromConfig(const EffectConfig& config) {
         {keys::mouse_companion::kTestHeadTintMax, companion.testHeadTintMax},
         {keys::mouse_companion::kTestHeadTintDecayPerSecond, companion.testHeadTintDecayPerSecond},
     };
+    root[keys::kSpeedAdaptive] = {
+        {keys::speed_adaptive::kEnableSpeedAdaptive, config.speedAdaptive.enableSpeedAdaptive},
+        {keys::speed_adaptive::kMinIntensity, config.speedAdaptive.minIntensity},
+        {keys::speed_adaptive::kMaxIntensity, config.speedAdaptive.maxIntensity},
+        {keys::speed_adaptive::kSensitivity, config.speedAdaptive.sensitivity},
+    };
     root[keys::kEffects] = serialize_internal::BuildEffectsJson(config);
     return root;
 }

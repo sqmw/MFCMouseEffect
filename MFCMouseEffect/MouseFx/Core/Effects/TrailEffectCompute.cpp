@@ -102,7 +102,8 @@ TrailEffectRenderCommand ComputeTrailEffectRenderCommand(
     double deltaX,
     double deltaY,
     const std::string& effectType,
-    const TrailEffectProfile& profile) {
+    const TrailEffectProfile& profile,
+    double speedAdaptiveIntensity) {
     TrailEffectRenderCommand command{};
     command.emit = true;
     command.overlayPoint = overlayPoint;
@@ -125,7 +126,8 @@ TrailEffectRenderCommand ComputeTrailEffectRenderCommand(
                                                  : static_cast<double>(profile.normalSizePx);
     const double speedSizeScale = 0.85 + command.intensity * 0.35;
     const double speedDurationScale = 0.90 + command.intensity * 0.25;
-    command.sizePx = static_cast<int>(std::lround(std::clamp(baseSize * tempo.sizeScale * speedSizeScale, 28.0, 180.0)));
+    // 应用速度自适应强度
+    command.sizePx = static_cast<int>(std::lround(std::clamp(baseSize * tempo.sizeScale * speedSizeScale * speedAdaptiveIntensity, 28.0, 180.0)));
     command.durationSec = std::clamp(profile.durationSec * tempo.durationScale * speedDurationScale, 0.08, 3.0);
     command.closeAfterMs = static_cast<int>(command.durationSec * 1000.0) + profile.closePaddingMs;
     command.baseOpacity = std::clamp(profile.baseOpacity, 0.05, 1.0);
@@ -134,7 +136,8 @@ TrailEffectRenderCommand ComputeTrailEffectRenderCommand(
     const double speedLineScale = (command.normalizedType == "line")
         ? 1.0
         : (0.88 + command.intensity * 0.52);
-    command.lineWidthPx = std::clamp(baseLineWidth * typeLineScale * speedLineScale, 1.0, 24.0);
+    // 应用速度自适应强度到线宽
+    command.lineWidthPx = std::clamp(baseLineWidth * typeLineScale * speedLineScale * speedAdaptiveIntensity, 1.0, 24.0);
     command.fillArgb = color.fillArgb;
     command.strokeArgb = color.strokeArgb;
     return command;
